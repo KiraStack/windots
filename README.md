@@ -15,7 +15,7 @@ To use these dotfiles, manually link the configuration files to their expected l
 
 1. Clone the repository:
    ```powershell
-   git clone https://github.com/yourusername/dotfiles.git C:\dotfiles
+   git clone https://github.com/VisoredPrograms/dotfiles.git C:\dotfiles
    ```
 
 2. Create symbolic links to the appropriate directories or files. For example:
