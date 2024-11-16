@@ -1,15 +1,18 @@
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
+-- Set up leader keys before loading lazy.nvim for correct mappings
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- General options
-vim.opt.number = true
-vim.opt.clipboard = "unnamedplus"  -- Use system clipboard
+-- General settings
+vim.opt.number = true -- Show line numbers
+vim.opt.clipboard = "unnamedplus" -- Use system clipboard
 
--- Set up indentation
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+-- Indentation settings
+vim.opt.tabstop = 4 -- Set tab width to 4 spaces
+vim.opt.shiftwidth = 4 -- Set indentation width to 4 spaces
 
+-- Disable netrw and its plugin
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Enable true color support in the terminal
 vim.opt.termguicolors = true

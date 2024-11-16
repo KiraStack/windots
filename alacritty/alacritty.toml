@@ -1,0 +1,37 @@
+# General Settings
+[general]
+live_config_reload = true
+import = ["~/AppData/Roaming/alacritty/themes/one-dark.toml"]
+
+# Terminal Environment
+[env]
+TERM = "xterm-256color"
+
+# Default Shell Settings
+[terminal.shell]
+program = "powershell.exe"
+args = ["-NoExit", "-Command", "Set-Location -Path $HOME"]
+
+# Window Appearance
+[window]
+decorations = "None"
+padding = { x = 10, y = 10 }  # Adjust the padding values as desired
+
+# Font Settings
+[font]
+size = 16
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+# Cursor Appearance
+[cursor]
+style = "Beam"
+unfocused_hollow = false
+
+# Key Bindings
+[[keyboard.bindings]]
+action = "CreateNewTab"
+key = "Return"
+mods = "Control|Shift"

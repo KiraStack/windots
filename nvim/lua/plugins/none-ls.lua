@@ -29,7 +29,13 @@ return {
 					end, { desc = "Format the current buffer with LSP" })
 
 					-- Key mapping for manual formatting
-					vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>fm", "<cmd>Format<CR>", { noremap = true, silent = true })
+					vim.api.nvim_buf_set_keymap(
+						bufnr,
+						"n",
+						"<Leader>fm",
+						"<cmd>Format<CR>",
+						{ noremap = true, silent = true }
+					)
 				end
 			end,
 		})
