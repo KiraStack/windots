@@ -9,7 +9,8 @@ return {
 			sources = {
 				-- Formatters
 				null_ls.builtins.formatting.stylua,
-				require("none-ls.formatting.ruff"),
+				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.isort,
 
 				null_ls.builtins.formatting.prettier.with({
 					filetypes = { "html", "json", "yaml", "markdown" },
