@@ -1,65 +1,60 @@
-local wezterm = require 'wezterm'
-
--- Define color schemes for light and dark appearances
-local color_schemes = {
-    light = 'Catppuccin Latte',
-    dark = 'Catppuccin Frappe',
-}
-
--- Create the configuration object using the builder
+local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
--- Set color scheme dynamically based on appearance
-config.color_scheme = wezterm.gui.get_appearance():find('Dark') and color_schemes.dark or color_schemes.light
+-- Function to determine the color scheme based on appearance
+function scheme_for_appearance(appearance)
+    return (appearance:find("Dark") and "Catppuccin Frappe") or "Catppuccin Latte"
+end
 
--- Configure font and size
-config.font = wezterm.font('FiraCode Nerd Font')  -- Optimized syntax for better clarity
+-- Set color scheme dynamically based on system appearance
+local appearance = wezterm.gui.get_appearance()
+config.color_scheme = scheme_for_appearance(appearance)
+
+-- Font settings
+config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 16
+config.bold_brightens_ansi_colors = true
 
--- Configure cursor and default program
-config.default_cursor_style = 'BlinkingBar'
-config.default_prog = { 'powershell.exe', '-nologo' }
-
--- Simplify window appearance
-config.window_decorations = 'RESIZE'
-config.use_fancy_tab_bar = false
+-- Cursor and window settings
+config.default_cursor_style = "SteadyBlock"
+config.default_prog = { "powershell.exe", "-nologo" }
+config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 
--- Enable automatic configuration reload
+-- Auto-reload and keybindings
 config.automatically_reload_config = true
-
--- Disable all default key bindings
 config.disable_default_key_bindings = true
 
--- Configure leader key and key bindings
-config.leader = { key = 'Space', mods = 'CTRL|SHIFT', timeout_milliseconds = 1000, }
-
--- Use custom key bindings from a utility module
-config.keys = {
-    -- New tab
-    { key = 't', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnTab('CurrentPaneDomain') },
-    -- Close current pane with confirmation
-    { key = 'w', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentPane { confirm = true } },
-    -- Toggle full screen
-    { key = 'n', mods = 'CTRL|SHIFT', action = wezterm.action.ToggleFullScreen },
-    -- Horizontal split (Hyper.is style)
-    { key = 'd', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    -- Vertical split (Hyper.is style)
-    { key = 'e', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
-    -- Copy to clipboard
-    { key = 'c', mods = 'CTRL|SHIFT', action = wezterm.action.CopyTo('Clipboard') },
-    -- Paste from clipboard
-    { key = 'v', mods = 'CTRL|SHIFT', action = wezterm.action.PasteFrom('Clipboard') },
+-- Leader key settings
+config.leader = {
+    key = "Space",
+    mods = "CTRL|SHIFT",
+    timeout_milliseconds = 1000,
 }
 
--- Generate tab activation keybindings dynamically
+-- Custom key bindings
+config.keys = {
+    -- Pane and tab management
+    { key = "t", mods = "CTRL|SHIFT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },  -- New tab
+    { key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentPane { confirm = true } }, -- Close pane with confirmation
+
+    -- Window management
+    { key = "n", mods = "CTRL|SHIFT", action = wezterm.action.ToggleFullScreen }, -- Toggle fullscreen
+    { key = "d", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } }, -- Horizontal split
+    { key = "e", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } }, -- Vertical split
+
+    -- Clipboard management
+    { key = "c", mods = "CTRL|SHIFT", action = wezterm.action.CopyTo("Clipboard") }, -- Copy to clipboard
+    { key = "v", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom("Clipboard") }, -- Paste from clipboard
+}
+
+-- Tab activation (CTRL+ALT+1-8)
 for i = 1, 8 do
     table.insert(config.keys, {
         key = tostring(i),
-        mods = 'CTRL|ALT',
+        mods = "CTRL|ALT",
         action = wezterm.action.ActivateTab(i - 1),
     })
 end
 
--- Return the finalized configuration
 return config
