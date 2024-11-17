@@ -1,8 +1,5 @@
 return {
 	"nvimdev/dashboard-nvim",
-	event = "VimEnter",
+	event = "VimEnter", -- Load when NeoVim starts
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = function()
-		require("dashboard").setup()
-	end,
 }

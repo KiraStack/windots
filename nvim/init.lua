@@ -1,18 +1,14 @@
-function safe_require(module)
-	local success, response = pcall(require, module)
-	if success then
-		return response
+local function safe_require(module)
+	local success = pcall(require, module)
+	if not success then
+		vim.api.nvim_err_writeln("Failed to load module: " .. module)
 	end
-
-	vim.notify("There were issues reported with your startup file.", vim.log.levels.WARN)
-	vim.notify("Failed to load module: " .. module, vim.log.levels.WARN)
 end
 
--- Define the list of core modules
+-- Define and load core modules in a single call for minimal overhead
 local core_modules = {
 	"core.options",
 	"core.lazy",
-	"core.autocmds",
 }
 
 for _, module in ipairs(core_modules) do

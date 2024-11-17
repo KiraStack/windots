@@ -1,18 +1,20 @@
 return {
 	"nvimtools/none-ls.nvim",
+	event = "BufReadPre", -- Load when a buffer is about to be read
 	dependencies = { "nvimtools/none-ls-extras.nvim" },
 	config = function()
 		local null_ls = require("null-ls")
+		local builtin = null_ls.builtins
 
 		-- Configure null-ls with formatting and diagnostic sources
 		null_ls.setup({
 			sources = {
 				-- Formatters
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.black,
-				null_ls.builtins.formatting.isort,
+				builtin.formatting.stylua,
+				builtin.formatting.black,
+				builtin.formatting.isort,
 
-				null_ls.builtins.formatting.prettier.with({
+				builtin.formatting.prettier.with({
 					filetypes = { "html", "json", "yaml", "markdown" },
 					extra_filetypes = { "toml" },
 				}),
@@ -22,26 +24,17 @@ return {
 				require("none-ls.diagnostics.eslint"),
 			},
 			on_attach = function(client, bufnr)
-				-- Enable formatting on save
+				-- Enable formatting on save and provide a command for manual formatting
 				if client.supports_method("textDocument/formatting") then
-					vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-						vim.lsp.buf.format({ bufnr = bufnr })
-					end, { desc = "Format the current buffer with LSP" })
+					-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+					-- 	vim.lsp.buf.format({ bufnr = bufnr })
+					-- end, { desc = "Format the current buffer with LSP" })
 
 					-- Key mapping for manual formatting
-					vim.api.nvim_buf_set_keymap(
-						bufnr,
-						"n",
-						"<Leader>fm",
-						"<cmd>Format<CR>",
-						{ noremap = true, silent = true }
-					)
+					vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>gf", "<cmd>Format<CR>", { noremap = true, silent = true })
 				end
 			end,
 		})
-
-		-- Keybinding for formatting the buffer
-		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
 
 		-- Configure diagnostics appearance
 		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

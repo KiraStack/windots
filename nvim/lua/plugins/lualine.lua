@@ -4,4 +4,5 @@ return {
 	config = function()
 		require("lualine").setup({ theme = "auto" })
 	end,
+	priority = 999, -- Load immediately for a fast statusline
 }

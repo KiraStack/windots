@@ -1,6 +1,6 @@
 return {
 	"folke/which-key.nvim",
-	event = "VeryLazy",
+	cmd = "WhichKey", -- Load only when the command is issued
 	keys = {
 		{
 			"<leader>?",
