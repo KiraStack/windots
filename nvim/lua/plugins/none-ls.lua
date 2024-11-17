@@ -23,17 +23,14 @@ return {
 				require("none-ls.diagnostics.ruff"),
 				require("none-ls.diagnostics.eslint"),
 			},
-			on_attach = function(client, bufnr)
-				-- Enable formatting on save and provide a command for manual formatting
-				if client.supports_method("textDocument/formatting") then
-					-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-					-- 	vim.lsp.buf.format({ bufnr = bufnr })
-					-- end, { desc = "Format the current buffer with LSP" })
-
-					-- Key mapping for manual formatting
-					vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>gf", "<cmd>Format<CR>", { noremap = true, silent = true })
-				end
-			end,
+			-- on_attach = function(client, bufnr)
+			-- 	-- Enable formatting on save
+			-- 	if client.supports_method("textDocument/formatting") then
+			-- 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+			-- 			vim.lsp.buf.format({ bufnr = bufnr })
+			-- 		end, { desc = "Format the current buffer with LSP" })
+			-- 	end
+			-- end,
 		})
 
 		-- Configure diagnostics appearance
