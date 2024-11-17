@@ -1,13 +1,25 @@
 return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost", -- Load after the buffer is completely read
+	dependencies = {
+        "williamboman/mason.nvim",           -- Dependency for managing external LSPs, linters, etc.
+        "williamboman/mason-lspconfig.nvim", -- Dependency for integrating Mason with nvim-lspconfig
+    },
     config = function()
-        local lspconfig = require('lspconfig')
+        local lspconfig = require("lspconfig")
 
-        -- Python (Pyright)
-        lspconfig.pyright.setup()
+        -- Set up Mason
+        require('mason').setup()
+        
+        -- Set up Mason LSP config
+        require('mason-lspconfig').setup({
+            ensure_installed = { 'pyright', 'tsserver' }
+        })
 
-        -- JavaScript/TypeScript (ts_ls)
-        lspconfig.ts_ls.setup()
+        -- Python (Pyright) configuration
+        lspconfig.pyright.setup {}
+
+        -- JavaScript/TypeScript (tsserver) configuration
+        lspconfig.tsserver.setup {}
     end
 }
