@@ -11,7 +11,7 @@ local appearance = wezterm.gui.get_appearance()
 config.color_scheme = scheme_for_appearance(appearance)
 
 -- Font settings
-config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 16
 config.bold_brightens_ansi_colors = true
 
