@@ -1,31 +1,35 @@
 return {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "L3MON4D3/LuaSnip",
-    },
-    event = "InsertEnter",
+    "nvimtools/none-ls.nvim",
+    event = "BufReadPost",
+	dependencies = { "nvimtools/none-ls-extras.nvim" },
     config = function()
-        local cmp = require("cmp")
-        local luasnip = require("luasnip")
+        local null_ls = require("null-ls")
 
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+        -- Configure custom diagnostics if builtins aren't available
+        null_ls.setup({
+            sources = {
+                -- Python: Ruff and Black
+                require("none-ls.diagnostics.ruff"),
+                null_ls.builtins.formatting.black,
+
+                -- JavaScript/TypeScript: Eslint and Prettier
+                require("none-ls.diagnostics.eslint_d"),
+                null_ls.builtins.formatting.prettier,
             },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-e>"] = cmp.mapping.abort(),
-            }),
-            sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-            }),
         })
 
-        require("luasnip.loaders.from_vscode").lazy_load()
+        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = false,
+            signs = true,
+            update_in_insert = false,
+            underline = true,
+        })
+
+        vim.diagnostic.config({
+            float = {
+                source = "always",
+                border = "rounded",
+            },
+        })
     end,
 }
