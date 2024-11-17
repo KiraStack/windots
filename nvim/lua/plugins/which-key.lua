@@ -1,6 +1,6 @@
 return {
 	"folke/which-key.nvim",
-	cmd = "WhichKey", -- Load only when the command is issued
+	event = "BufReadPost",  -- Load after the buffer is completely read
 	keys = {
 		{
 			"<leader>?",

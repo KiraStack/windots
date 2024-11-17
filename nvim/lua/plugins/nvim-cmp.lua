@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "CursorHold", -- Load when user stops typing
+	event = "InsertEnter", -- Load when entering insert mode
 	config = function()
 		local cmp = require("cmp")
 		require("luasnip.loaders.from_vscode").lazy_load()

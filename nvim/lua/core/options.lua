@@ -1,18 +1,18 @@
--- Set up leader keys before loading lazy.nvim for correct mappings
+-- Set essential leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- General settings
-vim.opt.number = true -- Show line numbers
-vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+-- Core settings to minimize startup overhead
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.termguicolors = true
 
 -- Indentation settings
-vim.opt.tabstop = 4 -- Set tab width to 4 spaces
-vim.opt.shiftwidth = 4 -- Set indentation width to 4 spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
--- Disable netrw and its plugin
+-- Disable netrw and its plugin entirely (saves resources)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
--- Enable true color support in the terminal
-vim.opt.termguicolors = true

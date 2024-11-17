@@ -1,6 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
-	event = "BufReadPre", -- Load when a buffer is about to be read
+	event = "BufReadPost",  -- Load after the buffer is completely read
 	dependencies = { "nvimtools/none-ls-extras.nvim" },
 	config = function()
 		local null_ls = require("null-ls")

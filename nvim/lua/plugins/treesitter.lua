@@ -1,5 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	event = "CursorHold", -- Lazy load after initial user interaction
+	event = "BufReadPost",  -- Load after the buffer is completely read
 }
