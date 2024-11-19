@@ -13,13 +13,13 @@ return {
         
         -- Set up Mason LSP config
         require('mason-lspconfig').setup({
-            ensure_installed = { 'pyright', 'tsserver' }
+            ensure_installed = { 'pyright', 'ts_ls' }
         })
 
         -- Python (Pyright) configuration
         lspconfig.pyright.setup {}
 
         -- JavaScript/TypeScript (tsserver) configuration
-        lspconfig.tsserver.setup {}
+        lspconfig.ts_ls.setup {}
     end
 }
