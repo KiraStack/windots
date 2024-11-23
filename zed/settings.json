@@ -4,39 +4,29 @@
 // `zed: open default settings` (cmd-shift-p / ctrl-shift-p).
 
 {
-    // Vim Mode: Enables or disables Vim-style keybindings.
-    "vim_mode": false,
+    "vim_mode": false, // Disable Vim keybindings
 
-    // Telemetry: Control whether Zed sends diagnostic and usage data.
     "telemetry": {
-        "diagnostics": false, // Do not send diagnostic reports.
-        "metrics": false // Do not send usage metrics.
+        "diagnostics": false, // Do not send diagnostic data
+        "metrics": false // Do not send usage metrics
     },
 
-    // Font Settings: Customize font appearance in the UI and code buffers.
-    "ui_font_size": 16, // Font size for the UI.
-    "buffer_font_size": 14, // Font size for editing text/code.
-    "ui_font_family": "Hack Nerd Font", // Font family for the UI.
-    "buffer_font_family": "Hack Nerd Font", // Font family for the code editor.
+    "ui_font_size": 16, // Font size for the UI
+    "buffer_font_size": 14, // Font size for code buffers
+    "ui_font_family": "JetBrains Mono", // UI font
+    "buffer_font_family": "JetBrains Mono", // Code editor font
 
-    // Line Numbers: Use relative numbering in code buffers.
-    "relative_line_numbers": true, // Show line numbers relative to the cursor.
+    "relative_line_numbers": true, // Show line numbers relative to the cursor
+    "format_on_save": "on", // Automatically format code on save
+    "tab_size": 4, // Number of spaces per tab
 
-    // Auto Formatting: Format code automatically on save.
-    "format_on_save": "on",
-
-    // Tab Size: Set the number of spaces used for tab characters.
-    "tab_size": 4,
-
-    // Advanced Font Rendering: Enable extra font features for better typography.
     "buffer_font_features": {
-        "calt": true // Enable contextual alternates for smooth rendering.
+        "calt": true // Enable contextual alternates
     },
 
-    // Theme: Control themes for light and dark modes.
     "theme": {
-        "mode": "system", // Automatically match the system's light/dark mode.
-        "light": "One Light", // Theme used in light mode.
-        "dark": "One Dark" // Theme used in dark mode.
+        "mode": "system", // Match system light/dark mode
+        "light": "One Light", // Theme for light mode
+        "dark": "One Dark" // Theme for dark mode
     }
 }
