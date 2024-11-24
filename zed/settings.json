@@ -1,32 +1,58 @@
 // Zed Settings
-// For configuration details, see: https://zed.dev/docs/configuring-zed
-// To view default settings without changes, use the command:
+// For detailed configuration options, visit: https://zed.dev/docs/configuring-zed
+// To view unmodified default settings, run:
 // `zed: open default settings` (cmd-shift-p / ctrl-shift-p).
 
 {
-    "vim_mode": false, // Disable Vim keybindings
+    "vim_mode": false, // Disable Vim-style keybindings
 
     "telemetry": {
-        "diagnostics": false, // Do not send diagnostic data
-        "metrics": false // Do not send usage metrics
+        "diagnostics": false, // Disable diagnostic data submission
+        "metrics": false // Disable usage metrics submission
     },
 
-    "ui_font_size": 16, // Font size for the UI
-    "buffer_font_size": 14, // Font size for code buffers
-    "ui_font_family": "JetBrains Mono", // UI font
-    "buffer_font_family": "JetBrains Mono", // Code editor font
+    "ui_font_size": 16, // UI font size
+    "buffer_font_size": 14, // Font size in code buffers
+    "ui_font_family": "JetBrains Mono", // Font for UI elements
+    "buffer_font_family": "JetBrains Mono", // Font for the code editor
 
-    "relative_line_numbers": true, // Show line numbers relative to the cursor
-    "format_on_save": "on", // Automatically format code on save
-    "tab_size": 4, // Number of spaces per tab
+    "relative_line_numbers": true, // Enable relative line numbers
+    "format_on_save": "on", // Format files automatically on save
+    "tab_size": 4, // Set tab width to 4 spaces
 
     "buffer_font_features": {
-        "calt": true // Enable contextual alternates
+        "calt": true // Enable contextual alternates in fonts
     },
 
     "theme": {
-        "mode": "system", // Match system light/dark mode
+        "mode": "system", // Follow system light/dark mode setting
         "light": "One Light", // Theme for light mode
         "dark": "One Dark" // Theme for dark mode
+    },
+
+    "languages": {
+        "Python": {
+            "format_on_save": "on", // Enable auto-formatting for Python
+            "language_servers": ["pyright", "ruff"], // Python language servers
+            "formatter": [
+                {
+                    "code_actions": {
+                        "source.fixAll.ruff": true, // Fix all auto-fixable issues
+                        "source.organizeImports.ruff": true // Organize imports
+                    }
+                }
+            ]
+        },
+        "JavaScript": {
+            "formatter": {
+                "external": {
+                    "command": "prettier", // Use Prettier for formatting
+                    "arguments": ["--stdin-filepath", "{buffer_path}"]
+                }
+            },
+            "code_actions_on_format": {
+                "source.fixAll.eslint": true // Auto-fix issues with ESLint
+            }
+        }
     }
 }
