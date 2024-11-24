@@ -18,4 +18,6 @@ vim.keymap.set("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", vim.t
 vim.keymap.set("n", "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
 
 -- Formatting (use `g` prefix to remain consistent with LSP group)
-vim.keymap.set("n", "<leader>gf", "<cmd>Format<CR>", vim.tbl_extend("force", opts, { desc = "Format document" }))
+vim.keymap.set("n", "<leader>gf", function()
+    require("conform").format({ async = true, lsp_fallback = true })
+end, vim.tbl_extend("force", opts, { desc = "Format document" }))
