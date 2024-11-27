@@ -1,23 +1,44 @@
 local builtin = require("telescope.builtin")
 local opts = { noremap = true, silent = true }
 
+-- Helper function to set keymaps
+local function map(key, action, desc)
+  vim.keymap.set("n", key, action, vim.tbl_extend("force", opts, { desc = desc }))
+end
+
 -- Fuzzy searching and file navigation (use `f` prefix)
-vim.keymap.set("n", "<leader>ff", builtin.find_files, vim.tbl_extend("force", opts, { desc = "Find files" }))
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, vim.tbl_extend("force", opts, { desc = "Search project with live grep" }))
-vim.keymap.set("n", "<leader>fb", builtin.buffers, vim.tbl_extend("force", opts, { desc = "List open buffers" }))
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, vim.tbl_extend("force", opts, { desc = "Find help tags" }))
+map("<leader>ff", builtin.find_files, "Find files")
+map("<leader>fg", builtin.live_grep, "Search project with live grep")
+map("<leader>fb", builtin.buffers, "List open buffers")
+map("<leader>fh", builtin.help_tags, "Find help tags")
 
 -- NvimTree file explorer commands (use `t` prefix)
-vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", vim.tbl_extend("force", opts, { desc = "Toggle NvimTree" }))
-vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFileToggle<CR>", vim.tbl_extend("force", opts, { desc = "Find and toggle file in NvimTree" }))
-vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", vim.tbl_extend("force", opts, { desc = "Refresh NvimTree" }))
+map("<leader>tt", "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree")
+map("<leader>tf", "<cmd>NvimTreeFindFileToggle<CR>", "Find and toggle file in NvimTree")
+map("<leader>tr", "<cmd>NvimTreeRefresh<CR>", "Refresh NvimTree")
 
 -- LSP and navigation (use `g` prefix for LSP and navigation commands)
-vim.keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-vim.keymap.set("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", vim.tbl_extend("force", opts, { desc = "Find references" }))
-vim.keymap.set("n", "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+map("<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition")
+map("<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", "Find references")
+map("<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol")
 
 -- Formatting (use `g` prefix to remain consistent with LSP group)
-vim.keymap.set("n", "<leader>gf", function()
-    require("conform").format({ async = true, lsp_fallback = true })
-end, vim.tbl_extend("force", opts, { desc = "Format document" }))
+map("<leader>gf", function() require("conform").format({ async = true, lsp_fallback = true }) end, "Format document")
+
+-- Initialize Harpoon
+local harpoon = require("harpoon")
+harpoon.setup()
+
+-- Harpoon key mappings (use `h` prefix)
+-- Harpoon file management commands
+map("<leader>ha", function() require("harpoon.mark").add_file() end, "Add current file to Harpoon")
+map("<leader>hl", function() require("harpoon.mark").clear_all() end, "Clear all Harpoon files")
+-- Harpoon navigation commands
+map("<leader>hn", function() require("harpoon.ui").toggle_quick_menu() end, "Toggle Harpoon quick menu")
+map("<leader>h1", function() require("harpoon.ui").nav_file(1) end, "Go to Harpoon file 1")
+map("<leader>h2", function() require("harpoon.ui").nav_file(2) end, "Go to Harpoon file 2")
+map("<leader>h3", function() require("harpoon.ui").nav_file(3) end, "Go to Harpoon file 3")
+map("<leader>h4", function() require("harpoon.ui").nav_file(4) end, "Go to Harpoon file 4")
+-- Toggle previous & next buffers stored within Harpoon list
+map("<C-S-P>", function() harpoon:list():prev() end)
+map("<C-S-N>", function() harpoon:list():next() end)
