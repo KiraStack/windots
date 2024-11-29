@@ -1,11 +1,9 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        event = "VimEnter",  -- Load when the editor is ready
+        "navarasu/onedark.nvim",
         priority = 1000, -- High priority to load early
         config = function()
-            vim.cmd.colorscheme "catppuccin"
+            require('onedark').load()
         end,
     },    
     {

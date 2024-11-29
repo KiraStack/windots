@@ -23,21 +23,3 @@ map("<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol")
 
 -- Formatting (use `g` prefix to remain consistent with LSP group)
 map("<leader>gf", function() require("conform").format({ async = true, lsp_fallback = true }) end, "Format document")
-
--- Initialize Harpoon
-local harpoon = require("harpoon")
-harpoon.setup()
-
--- Harpoon key mappings (use `h` prefix)
--- Harpoon file management commands
-map("<leader>ha", function() require("harpoon.mark").add_file() end, "Add current file to Harpoon")
-map("<leader>hl", function() require("harpoon.mark").clear_all() end, "Clear all Harpoon files")
--- Harpoon navigation commands
-map("<leader>hn", function() require("harpoon.ui").toggle_quick_menu() end, "Toggle Harpoon quick menu")
-map("<leader>h1", function() require("harpoon.ui").nav_file(1) end, "Go to Harpoon file 1")
-map("<leader>h2", function() require("harpoon.ui").nav_file(2) end, "Go to Harpoon file 2")
-map("<leader>h3", function() require("harpoon.ui").nav_file(3) end, "Go to Harpoon file 3")
-map("<leader>h4", function() require("harpoon.ui").nav_file(4) end, "Go to Harpoon file 4")
--- Toggle previous & next buffers stored within Harpoon list
-map("<C-S-P>", function() harpoon:list():prev() end)
-map("<C-S-N>", function() harpoon:list():next() end)

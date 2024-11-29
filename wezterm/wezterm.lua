@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 
 -- Function to determine the color scheme based on appearance
 function scheme_for_appearance(appearance)
-	return appearance:find("Dark") and "Catppuccin Mocha" or "Catppuccin Latte"
+	return (appearance:find("Dark") and "OneDark (base16)") or "One Light (base16)"
 end
 
 -- Set color scheme dynamically based on system appearance

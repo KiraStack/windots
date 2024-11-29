@@ -1,6 +1,7 @@
 return {
     {
         "williamboman/mason.nvim",
+        event = "BufReadPost",  -- Load when a buffer has been read
         dependencies = { "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" },
         config = function()
             local servers = { "pyright", "ts_ls" }
@@ -35,7 +36,12 @@ return {
                 underline = true,
             })
     
-            vim.diagnostic.config({ float = { source = "always", border = "rounded", }, })
+            vim.diagnostic.config({
+                float = {
+                    source = "always", 
+                    border = "rounded"
+                },
+            })
         end,
     }
 }
