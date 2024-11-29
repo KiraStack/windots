@@ -1,4 +1,3 @@
-local builtin = require("telescope.builtin")
 local opts = { noremap = true, silent = true }
 
 -- Helper function to set keymaps
@@ -7,10 +6,10 @@ local function map(key, action, desc)
 end
 
 -- Fuzzy searching and file navigation (use `f` prefix)
-map("<leader>ff", builtin.find_files, "Find files")
-map("<leader>fg", builtin.live_grep, "Search project with live grep")
-map("<leader>fb", builtin.buffers, "List open buffers")
-map("<leader>fh", builtin.help_tags, "Find help tags")
+map("<leader>ff", ":Telescope find_files<CR>", "Find files")
+map("<leader>fg", ":Telescope live_grep<CR>", "Search project with live grep")
+map("<leader>fb", ":Telescope buffers<CR>", "List open buffers")
+map("<leader>fh", ":Telescope help_tags<CR>", "Find help tags")
 
 -- NvimTree file explorer commands (use `t` prefix)
 map("<leader>tt", "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree")

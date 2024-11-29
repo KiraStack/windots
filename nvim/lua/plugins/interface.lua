@@ -2,7 +2,7 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        event = "BufWinEnter",  -- Triggered when a buffer window is entered
+        event = "VimEnter",  -- Load when the editor is ready
         priority = 1000, -- High priority to load early
         config = function()
             vim.cmd.colorscheme "catppuccin"
@@ -10,7 +10,7 @@ return {
     },    
     {
         "nvimdev/dashboard-nvim",
-        event = "BufWinEnter",  -- Triggered when a buffer window is entered
+        event = "BufWinEnter",  -- Load when a buffer is read
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
           require("dashboard").setup()
@@ -18,7 +18,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        event = "BufWinEnter",  -- Triggered when a buffer window is entered
+        event = "BufWinEnter",  -- Load when a buffer is read
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             vim.defer_fn(function()

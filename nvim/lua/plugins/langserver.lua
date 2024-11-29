@@ -1,7 +1,6 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "LspAttach",  -- Load when LSP attaches
         dependencies = { "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" },
         config = function()
             local servers = { "pyright", "ts_ls" }
@@ -16,13 +15,18 @@ return {
     },
     {
         "nvimtools/none-ls.nvim",
-        event = "LspAttach",  -- Load when LSP attaches
-        dependencies = { "nvimtools/none-ls-extras.nvim" },
+        event = "BufReadPost",  -- Load when a buffer has been read
+        -- dependencies = { "nvimtools/none-ls-extras.nvim" },
         config = function()
             local null_ls = require("null-ls")
     
             -- Configure custom diagnostics if builtins aren't available
-            null_ls.setup()
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.prettierd,
+                }
+            })
     
             vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
                 virtual_text = false,
