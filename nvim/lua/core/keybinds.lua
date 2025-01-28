@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 
 -- Helper function to set keymaps
 local function map(key, action, desc)
-  vim.keymap.set("n", key, action, vim.tbl_extend("force", opts, { desc = desc }))
+	vim.keymap.set("n", key, action, vim.tbl_extend("force", opts, { desc = desc }))
 end
 
 -- Fuzzy searching and file navigation (use `f` prefix)
@@ -22,4 +22,6 @@ map("<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", "Find references")
 map("<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol")
 
 -- Formatting (use `g` prefix to remain consistent with LSP group)
-map("<leader>gf", function() require("conform").format({ async = true, lsp_fallback = true }) end, "Format document")
+map("<leader>gf", function()
+	require("conform").format({ async = true, lsp_fallback = true })
+end, "Format document")

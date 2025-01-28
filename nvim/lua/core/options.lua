@@ -15,5 +15,5 @@ vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 
 -- Disable built-in plugins that are not needed
-vim.g.loaded_netrw = 1  -- Disable netrw (file explorer)
-vim.g.loaded_netrwPlugin = 1  -- Disable the netrw plugin
+vim.g.loaded_netrw = 1 -- Disable netrw (file explorer)
+vim.g.loaded_netrwPlugin = 1 -- Disable the netrw plugin
