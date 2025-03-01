@@ -4,8 +4,9 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
+			local flavours = { light = "latte", dark = "frappe" }
 			require("catppuccin").setup({
-				flavour = vim.opt.background:get() and "latte" or "frappe",
+				flavour = flavours[vim.opt.background:get()]
 			})
 			vim.cmd.colorscheme("catppuccin")
 		end,
