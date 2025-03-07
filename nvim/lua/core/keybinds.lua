@@ -25,3 +25,6 @@ map("<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol")
 map("<leader>gf", function()
 	require("conform").format({ async = true, lsp_fallback = true })
 end, "Format document")
+
+-- Theme navigation (use `s` prefix for themes)
+map("<leader>sh", ":Themery<CR>", "Toggle theme")

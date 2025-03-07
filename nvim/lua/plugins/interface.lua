@@ -4,12 +4,33 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			local flavours = { light = "latte", dark = "frappe" }
-			require("catppuccin").setup({
-				flavour = flavours[vim.opt.background:get()]
-			})
 			vim.cmd.colorscheme("catppuccin")
 		end,
+	},
+	{
+		"zaldih/themery.nvim",
+    	lazy = false,
+    	config = function()
+      		require("themery").setup({
+        		themes = {{ -- Your list of installed colorschemes.
+					name = "Latte",
+					colorscheme = "catppuccin-latte",
+				},
+				{
+					name = "Frappe",
+					colorscheme = "catppuccin-frappe",
+				},
+				{
+					name = "Macchiato",
+					colorscheme = "catppuccin-macchiato",
+				},
+				{
+					name = "Mocha",
+					colorscheme = "catppuccin-mocha",
+				}},
+  				livePreview = true, -- Apply theme while picking. Default to true.
+      		})
+    	end,
 	},
 	{
 		"nvimdev/dashboard-nvim",
