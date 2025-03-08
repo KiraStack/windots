@@ -1,26 +1,23 @@
-# Runs the Starship prompt initialization command for PowerShell
-# Invoke-Expression (&starship init powershell)
+# Initialize Starship prompt  
+# Invoke-Expression (&starship init powershell)  
 
-# Efficient system uptime function
-function uptime {
-    # Get system uptime since last boot
-    $lastBoot = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
-    $uptime = New-TimeSpan -Start $lastBoot 
-    
-    # Format uptime output
-    $days = $uptime.Days
-    $hours = $uptime.Hours
-    $minutes = $uptime.Minutes
-    $seconds = $uptime.Seconds
-    
-    return "${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds"
+Enable-PowerType # Enhanced autocomplete  
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView # Enable predictions  
+
+# Clear command history  
+function Remove-History {  
+    Remove-Item (Get-PSReadlineOption).HistorySavePath -Force  
+}  
+
+# Show system uptime  
+function Get-Uptime {  
+    $uptime = New-TimeSpan -Start (Get-CimInstance Win32_OperatingSystem).LastBootUpTime  
+    return "$($uptime.Days)d $($uptime.Hours)h $($uptime.Minutes)m $($uptime.Seconds)s"  
 }
 
 function prompt {
-    $path = $(Get-Location).Path # Get the current directory path
-    $path = $path.ToLower() -replace '^([a-z]):', '/$1' -replace '\\', '/' # Convert path from Windows to Unix style
-    Write-Host "" # Print a blank line before the prompt for spacing
-    Write-Host $path -ForegroundColor Green # Print the path in green
-    Write-Host ">" -NoNewline -ForegroundColor green # Print the prompt symbol ">" in green
+    $path = $(Get-Location).Path.ToLower() -replace '^([a-z]):', '/$1' -replace '\\', '/' # Unix-style path
+    Write-Host "`n$path" -ForegroundColor Green # Print path
+    Write-Host ">" -NoNewline -ForegroundColor Green # Prompt symbol
     return " "  # Ensures no unwanted extra prompt symbols
 }
