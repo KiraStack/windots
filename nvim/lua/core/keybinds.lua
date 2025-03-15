@@ -11,10 +11,13 @@ map("<leader>fg", ":Telescope live_grep<CR>", "Search project with live grep")
 map("<leader>fb", ":Telescope buffers<CR>", "List open buffers")
 map("<leader>fh", ":Telescope help_tags<CR>", "Find help tags")
 
+-- NeoTree file explorer commands (use `t` prefix)
+map("<leader>tt", "<cmd>Neotree<CR>", "Toggle NeoTree")
+
 -- NvimTree file explorer commands (use `t` prefix)
-map("<leader>tt", "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree")
-map("<leader>tf", "<cmd>NvimTreeFindFileToggle<CR>", "Find and toggle file in NvimTree")
-map("<leader>tr", "<cmd>NvimTreeRefresh<CR>", "Refresh NvimTree")
+-- map("<leader>tt", "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree")
+-- map("<leader>tf", "<cmd>NvimTreeFindFileToggle<CR>", "Find and toggle file in NvimTree")
+-- map("<leader>tr", "<cmd>NvimTreeRefresh<CR>", "Refresh NvimTree")
 
 -- LSP and navigation (use `g` prefix for LSP and navigation commands)
 map("<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition")

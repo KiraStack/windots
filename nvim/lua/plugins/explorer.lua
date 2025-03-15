@@ -3,7 +3,6 @@ return {
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
 		cmd = "Telescope", -- Load only when the Telescope command is run
-		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local harpoon = require("harpoon")
 			harpoon:setup({})
@@ -34,12 +33,15 @@ return {
 		end,
 	},
 	{
-		"nvim-tree/nvim-tree.lua",
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
 		event = "BufReadPost", -- Load when a buffer is read
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("nvim-tree").setup()
-		end,
+		dependencies = {
+		  "nvim-lua/plenary.nvim",
+		  "nvim-tree/nvim-web-devicons", -- Not strictly required, but recommended
+		  "MunifTanjim/nui.nvim",
+		  -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
+		}
 	},
 	{
 		"Bekaboo/dropbar.nvim",
@@ -51,6 +53,5 @@ return {
 		"ThePrimeagen/harpoon",
 		cmd = "Harpoon", -- Load only when the Telescope command is run
 		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 }
