@@ -35,7 +35,7 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "newTabMenu": 
     [
         {
@@ -47,12 +47,12 @@
         "defaults": 
         {
             "colorScheme": "Catppuccin Frappe",
-            "cursorShape": "underscore",
+            "cursorShape": "bar",
             "experimental.retroTerminalEffect": false,
             "font": 
             {
                 "builtinGlyphs": false,
-                "face": "JetBrainsMono Nerd Font"
+                "face": "Fira Code"
             }
         },
         "list": 
@@ -94,9 +94,28 @@
                 "source": "VSDebugConsole"
             },
             {
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{ffaa735b-582a-5f9d-9bf4-7767aeab9c04}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{d839b225-54b0-57aa-8392-41fb60015323}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{a3a2e83a-884a-5379-baa8-16f193a13b21}",
+                "hidden": false,
+                "name": "PowerShell 7 Preview",
                 "source": "Windows.Terminal.PowershellCore"
             }
         ]
