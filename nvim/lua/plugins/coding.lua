@@ -1,12 +1,10 @@
 return {
     {
         "nvim-lua/plenary.nvim",
-        lazy = true
     },
     {
         "folke/snacks.nvim",
-        priority = 1000,
-        lazy = false,
+        event = "VimEnter", -- Load when Vim has started
         opts = {
             dim = {enabled = true},
             dashboard = {enabled = true},
@@ -96,7 +94,7 @@ return {
                     Snacks.picker.grep_word()
                 end, desc = "Visual selection or word", mode = {"n", "x"}},
             -- search
-            {'<leader>s"', function()
+            {"<leader>s\"", function()
                     Snacks.picker.registers()
                 end, desc = "Registers"},
             {"<leader>s/", function()
@@ -247,20 +245,77 @@ return {
         }
     },
 	{
-		'andweeb/presence.nvim',
-		event = 'VimEnter', -- Load when Vim has started
+		"echasnovski/mini.nvim",
+		version = false,
+		event = "VimEnter", -- Load when Vim has started
+		opts = {
+			modules = {
+				["comment"] = {},
+				["move"] = {},
+				["pairs"] = {},
+				-- Disabled by omission:
+				-- ["ai"] = {},
+				-- ["align"] = {},
+				-- ["completion"] = {},
+				-- ["operators"] = {},
+				-- ["snippets"] = {},
+				-- ["splitjoin"] = {},
+				-- ["surround"] = {},
+				-- ["basics"] = {},
+				-- ["bracketed"] = {},
+				-- ["bufremove"] = {},
+				-- ["clue"] = {},
+				-- ["deps"] = {},
+				-- ["diff"] = {},
+				-- ["extra"] = {},
+				-- ["files"] = {},
+				-- ["git"] = {},
+				-- ["jump"] = {},
+				-- ["jump2d"] = {},
+				-- ["misc"] = {},
+				-- ["pick"] = {},
+				-- ["sessions"] = {},
+				-- ["visits"] = {},
+				-- ["animate"] = {},
+				-- ["base16"] = {},
+				-- ["colors"] = {},
+				-- ["cursorword"] = {},
+				-- ["hipatterns"] = {},
+				-- ["hues"] = {},
+				-- ["icons"] = {},
+				-- ["indentscope"] = {},
+				-- ["map"] = {},
+				-- ["notify"] = {},
+				-- ["starter"] = {},
+				-- ["statusline"] = {},
+				-- ["tabline"] = {},
+				-- ["trailspace"] = {},
+				-- ["doc"] = {},
+				-- ["fuzzy"] = {},
+				-- ["test"] = {},
+			},
+		},
+		config = function(_, opts)
+			for name, config in pairs(opts.modules) do
+				require("mini." .. name).setup(config)
+			end
+		end,
+	},
+	{
+		"andweeb/presence.nvim",
+		event = "BufReadPost", -- Load when a buffer is read
 		config = function()
-			require('presence'):setup({
-				neovim_image_text = 'The One True Text Editor',
-				main_image = 'file',
-				editing_text = 'Editing %s',
-				file_explorer_text = 'Browsing %s',
-				git_commit_text = 'Committing changes',
-				plugin_manager_text = 'Managing plugins',
-				lsp_client_text = 'Configuring LSP',
-				reading_text = 'Reading %s',
-				workspace_text = 'Working on %s',
-				line_number_text = 'Line %s out of %s',
+			require("presence"):setup({
+				neovim_image_text = "The One True Text Editor",
+				main_image = "file",
+				editing_text = "Editing %s",
+				file_explorer_text = "Browsing %s",
+				git_commit_text = "Committing changes",
+				plugin_manager_text = "Managing plugins",
+				lsp_client_text = "Configuring LSP",
+				reading_text = "Reading %s",
+				workspace_text = "Working on %s",
+				line_number_text = "Line %s out of %s",
 			})
 		end,
 	}
