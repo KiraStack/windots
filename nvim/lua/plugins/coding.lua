@@ -2,6 +2,24 @@ return {
     {
         "nvim-lua/plenary.nvim",
     },
+	{
+		"filipdutescu/renamer.nvim",
+		dependencies = {"nvim-lua/plenary.nvim"},
+		event = "BufReadPost", -- Load when a buffer is read
+		{
+			"filipdutescu/renamer.nvim",
+			event = "BufReadPost", -- Load when a buffer is read
+			keys = {
+				{"<F2>", "<cmd>lua require('renamer').rename()<cr>", mode = "i", desc = "Rename in insert mode"},
+				{"<leader>rn", "<cmd>lua require('renamer').rename()<cr>", mode = "n", desc = "Rename in normal mode"},
+				{"<leader>rn", "<cmd>lua require('renamer').rename()<cr>", mode = "v", desc = "Rename in visual mode"},
+			},
+			config = function()
+				require('renamer').setup()
+			end,
+		}
+
+	},
     {
         "folke/snacks.nvim",
         event = "VimEnter", -- Load when Vim has started
