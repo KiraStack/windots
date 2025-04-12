@@ -21,7 +21,7 @@ return {
 	},
     {
         "folke/snacks.nvim",
-        event = "VeryLazy", -- Load after full startup
+		lazy = false,
         opts = {
             dim = {enabled = true},
             dashboard = {enabled = true},

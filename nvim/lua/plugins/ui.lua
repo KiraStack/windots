@@ -77,7 +77,7 @@ return {
 	},
 	{
         "nvim-lualine/lualine.nvim",
-		event = "VeryLazy", -- Load after full startup
+		event = "BufReadPost", -- Load when a buffer is read
 		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
 		opts = {
 			options = { theme = "auto" },
