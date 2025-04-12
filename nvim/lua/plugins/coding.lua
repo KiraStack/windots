@@ -1,7 +1,4 @@
 return {
-    {
-        "nvim-lua/plenary.nvim",
-    },
 	{
 		"filipdutescu/renamer.nvim",
 		dependencies = {"nvim-lua/plenary.nvim"},
@@ -24,7 +21,7 @@ return {
 	},
     {
         "folke/snacks.nvim",
-        event = "VimEnter", -- Load when Vim has started
+        event = "VeryLazy", -- Load after full startup
         opts = {
             dim = {enabled = true},
             dashboard = {enabled = true},
@@ -267,7 +264,7 @@ return {
 	{
 		"echasnovski/mini.nvim",
 		version = false,
-		event = "VimEnter", -- Load when Vim has started
+		event = "VeryLazy", -- Load after full startup
 		opts = {
 			modules = {
 				["comment"] = {},
@@ -323,7 +320,7 @@ return {
 	},
 	{
 		"andweeb/presence.nvim",
-		event = "BufReadPost", -- Load when a buffer is read
+		event = "VeryLazy", -- Load after full startup
 		config = function()
 			require("presence"):setup({
 				neovim_image_text = "The One True Text Editor",

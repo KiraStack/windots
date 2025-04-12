@@ -1,7 +1,7 @@
 return {
 	{
 		"akinsho/bufferline.nvim",
-		event = "VeryLazy", -- Load after all core UI events for optimal startup performance
+		event = "VeryLazy", -- Load after full startup
 		keys = {
 			{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
 			{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
@@ -41,9 +41,8 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        opts = { style = "storm" },
         config = function()
-            vim.cmd("colorscheme tokyonight-storm")
+            vim.cmd.colorscheme("tokyonight-storm")
         end,
     },
     {
@@ -78,10 +77,13 @@ return {
 	},
 	{
         "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "BufWinEnter",  -- Load when a window is opened
-		config = function()
-			require("lualine").setup()
+		event = "VeryLazy", -- Load after full startup
+		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+		opts = {
+			options = { theme = "auto" },
+		},
+		config = function(_, opts)
+			require("lualine").setup(opts)
 		end,
     },
 	{
@@ -92,7 +94,7 @@ return {
 	{
         "folke/which-key.nvim",
         lazy = true,
-		event = "VeryLazy",  -- Load when Neovim is fully loaded (after startup)
+		event = "VeryLazy",  -- Load after full startup
 		opts_extend = { "spec" },
 		opts = {
 			preset = "helix",

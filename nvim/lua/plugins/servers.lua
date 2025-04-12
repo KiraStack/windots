@@ -1,7 +1,7 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "BufReadPost", -- Load when a buffer is read
+        event = "VeryLazy", -- Load after full startup
         dependencies = {"williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig"},
         config = function()
             local servers = {"pyright", "ts_ls"}
