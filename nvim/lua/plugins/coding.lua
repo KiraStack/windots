@@ -331,21 +331,8 @@ return {
 		end,
 	},
 	{
-		"andweeb/presence.nvim",
+		"vyfor/cord.nvim",
 		event = "VeryLazy", -- Load after full startup
-		config = function()
-			require("presence"):setup({
-				neovim_image_text = "The One True Text Editor",
-				main_image = "file",
-				editing_text = "Editing %s",
-				file_explorer_text = "Browsing %s",
-				git_commit_text = "Committing changes",
-				plugin_manager_text = "Managing plugins",
-				lsp_client_text = "Configuring LSP",
-				reading_text = "Reading %s",
-				workspace_text = "Working on %s",
-				line_number_text = "Line %s out of %s",
-			})
-		end,
+		build = ':Cord update'
 	}
 }
