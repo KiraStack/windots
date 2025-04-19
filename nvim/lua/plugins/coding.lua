@@ -1,5 +1,17 @@
 return {
 	{
+		"stevearc/overseer.nvim",
+		-- event = "VeryLazy", -- Load after full startup
+		cmd = {"OverseerRun", "OverseerToggle"},
+		keys = {
+			{ "<leader>or", ":OverseerRun<CR>", desc = "Run Overseer Task" },
+			{ "<leader>ot", ":OverseerToggle<CR>", desc = "Toggle Overseer Task List" },
+		},
+		config = function()
+			require('overseer').setup()
+		end,
+	},
+	{
 		"filipdutescu/renamer.nvim",
 		dependencies = {"nvim-lua/plenary.nvim"},
 		event = "BufReadPost", -- Load when a buffer is read
