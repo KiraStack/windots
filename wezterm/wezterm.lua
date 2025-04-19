@@ -33,7 +33,6 @@ local function bind_tabs(keys, mods)
 	end
 end
 
-
 -- Variables
 config.color_scheme = resolve_scheme()
 config.font = wezterm.font("JetBrains Mono")
@@ -46,7 +45,6 @@ config.hide_tab_bar_if_only_one_tab = true
 config.automatically_reload_config = true
 config.disable_default_key_bindings = true
 
--- Main functions
 config.leader = {
   key = "Space",
   mods = "CTRL|SHIFT",
