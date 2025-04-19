@@ -49,7 +49,7 @@ return {
         "zaldih/themery.nvim",
 		cmd = "Themery",  -- Load when the :Themery command is run
 		keys = {
-			{ "<leader>sh", ":Themery<CR>", "Toggle theme" }
+			{ "<leader>ct", ":Themery<CR>", "Toggle theme" }
 		},
 		config = function()
 			require("themery").setup({
