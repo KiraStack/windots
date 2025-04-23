@@ -2,35 +2,25 @@ return {
 {
 		"L3MON4D3/LuaSnip", -- Snippet plugin
         dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        opts = {
+			history = true,
+			updateevents = "TextChanged,TextChangedI"
+		},
         config = function(_, opts)
-			require("luasnip").config.set_config(opts)
+			local luasnip = require("luasnip")
+			luasnip.config.set_config(opts)
         end,
     },
-	{
-		"saadparwaiz1/cmp_luasnip",
-		event = "InsertEnter", -- Load when entering Insert mode
-	},
-    {
-		"hrsh7th/cmp-nvim-lua",
-		event = "InsertEnter", -- Load when entering Insert mode
-	},
-    {
-		"hrsh7th/cmp-nvim-lsp",
-		event = "InsertEnter", -- Load when entering Insert mode
-	},
-    {
-		"hrsh7th/cmp-buffer",
-		event = "InsertEnter", -- Load when entering Insert mode
-	},
-    {
-		"hrsh7th/cmp-path",
-		event = "InsertEnter", -- Load when entering Insert mode
-	},
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter", -- Load when entering Insert mode
-        dependencies = {"hrsh7th/cmp-nvim-lsp"},
+        dependencies = {
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
+		},
         config = function(_, opts)
             local cmp = require("cmp")
 			local luasnip = require("luasnip")
