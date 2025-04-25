@@ -5,6 +5,8 @@ local path = vim.fn.stdpath("config") .. "/lua/core"  -- Use forward slashes for
 local files = {}
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 
+vim.cmd("silent! lua vim.deprecated.health.check()") -- Suppress deprecation warnings check
+
 if is_windows then
     local cmd = 'dir \"' .. path .. '\" /b /a-d 2>nul'
     for file in io.popen(cmd):lines() do
@@ -16,6 +18,8 @@ else
         table.insert(files, file)
     end
 end
+
+
 
 for i, file in ipairs(files) do
     if file:match("%.lua$") then
