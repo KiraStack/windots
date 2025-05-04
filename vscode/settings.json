@@ -1,0 +1,106 @@
+{
+    // Workbench
+    "window.autoDetectColorScheme": true, // Save file before run
+    "workbench.preferredLightColorTheme": "Tokyo Night Light", // Preferred light color theme
+    "workbench.preferredDarkColorTheme": "Tokyo Night", // Preferred dark color theme
+    "workbench.editor.showTabs": "single", // Show tabs
+    "workbench.editor.enablePreview": false, // Enable preview
+
+    // Editor
+    "editor.cursorBlinking": "expand", // Cursor blinking
+    "editor.cursorStyle": "line", // Cursor style
+    "editor.cursorSmoothCaretAnimation": "on", // Smooth caret animation
+    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font
+    "editor.fontLigatures": true, // Ligatures
+    "editor.formatOnSave": false, // Format on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode", // Default formatter
+
+    // Prettier
+    "prettier.tabWidth": 4, // Tab width
+    "prettier.singleQuote": true, // Single quotes
+    "prettier.trailingComma": "all", // Trailing commas
+    "prettier.arrowParens": "always", // Arrow parens
+    "symbols.hidesExplorerArrows": false, // Hide explorer arrows
+    "javascript.updateImportsOnFileMove.enabled": "always", // Update imports on file move
+
+    // Terminal
+    "terminal.integrated.cursorStyle": "line", // Cursor style
+    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font
+
+    // Python
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8", // Default formatter
+        "editor.formatOnSave": true // Format on save
+    },
+    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Default interpreter path
+
+    // Live Server
+    // "liveServer.settings.CustomBrowser": "microsoft-edge", // Custom browser
+    // "liveServer.settings.port": 0, // Port
+
+    // Git
+    "git.autofetch": true,
+
+    // Code Runner
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "zig": "zig run",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "tsx",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runghc",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "sml": "cd $dir && sml $fileName",
+        "mojo": "mojo run",
+        "erlang": "escript",
+        "spwn": "spwn build",
+        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+        "gleam": "gleam run -m $fileNameWithoutExt"
+    }, // Executor map
+    "code-runner.runInTerminal": true, // Run in terminal
+    "code-runner.saveFileBeforeRun": true, 
+}
