@@ -2,7 +2,7 @@
     // Workbench
     "window.autoDetectColorScheme": true, // Save file before run
     "workbench.preferredLightColorTheme": "Tokyo Night Light", // Preferred light color theme
-    "workbench.preferredDarkColorTheme": "Tokyo Night", // Preferred dark color theme
+    "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // Preferred dark color theme
     "workbench.editor.showTabs": "single", // Show tabs
     "workbench.editor.enablePreview": false, // Enable preview
 
@@ -102,5 +102,5 @@
         "gleam": "gleam run -m $fileNameWithoutExt"
     }, // Executor map
     "code-runner.runInTerminal": true, // Run in terminal
-    "code-runner.saveFileBeforeRun": true, 
+    "code-runner.saveFileBeforeRun": true // Save file before execution
 }
