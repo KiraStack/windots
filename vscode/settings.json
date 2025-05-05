@@ -4,7 +4,7 @@
     "window.autoDetectColorScheme": true, // Auto detect color scheme
     "workbench.preferredLightColorTheme": "Tokyo Night Light", // Light theme preference
     "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // Dark theme preference
-    "workbench.editor.showTabs": "single", // Display single tab
+    "workbench.editor.showTabs": "multiple", // Display tabs
     "workbench.editor.enablePreview": false, // Disable editor preview
 
     // Editor settings
@@ -35,7 +35,15 @@
     },
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
 
-    // Luau settings
+    // Lua settings
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua", // Lua formatter
+        "editor.formatOnSave": true // Format on save
+    },
+    "[luau]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua", // Luau formatter
+        "editor.formatOnSave": true // Format on save
+    },
     "luau-lsp.plugin.port": 34872, // Luau LSP TCP port
 
     // Live Server settings
@@ -109,5 +117,5 @@
     "code-runner.saveFileBeforeRun": true, // Save file before running
 
     // Global profile settings
-    "workbench.settings.applyToAllProfiles": [] // Apply to all profiles
+    "workbench.settings.applyToAllProfiles": []
 }
