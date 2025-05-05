@@ -1,109 +1,113 @@
 {
-    // Workbench
-    "window.autoDetectColorScheme": true, // Save file before run
-    "workbench.preferredLightColorTheme": "Tokyo Night Light", // Preferred light color theme
-    "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // Preferred dark color theme
-    "workbench.editor.showTabs": "single", // Show tabs
-    "workbench.editor.enablePreview": false, // Enable preview
+    // Workbench settings
+    "workbench.iconTheme": "charmed-icons", // Icon theme
+    "window.autoDetectColorScheme": true, // Auto detect color scheme
+    "workbench.preferredLightColorTheme": "Tokyo Night Light", // Light theme preference
+    "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // Dark theme preference
+    "workbench.editor.showTabs": "single", // Display single tab
+    "workbench.editor.enablePreview": false, // Disable editor preview
 
-    // Editor
-    "editor.cursorBlinking": "expand", // Cursor blinking
+    // Editor settings
+    "editor.cursorBlinking": "expand", // Cursor blinking style
     "editor.cursorStyle": "line", // Cursor style
     "editor.cursorSmoothCaretAnimation": "on", // Smooth caret animation
-    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font
-    "editor.fontLigatures": true, // Ligatures
-    "editor.formatOnSave": false, // Format on save
-    "editor.defaultFormatter": "esbenp.prettier-vscode", // Default formatter
+    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font family
+    "editor.fontLigatures": true, // Enable font ligatures
+    "editor.formatOnSave": false, // Disable format on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode", // Default code formatter
 
-    // Prettier
+    // Prettier settings
     "prettier.tabWidth": 4, // Tab width
-    "prettier.singleQuote": true, // Single quotes
-    "prettier.trailingComma": "all", // Trailing commas
-    "prettier.arrowParens": "always", // Arrow parens
-    "symbols.hidesExplorerArrows": false, // Hide explorer arrows
-    "javascript.updateImportsOnFileMove.enabled": "always", // Update imports on file move
+    "prettier.singleQuote": true, // Use single quotes
+    "prettier.trailingComma": "all", // Add trailing commas
+    "prettier.arrowParens": "always", // Always use parens for arrow functions
+    "symbols.hidesExplorerArrows": false, // Show explorer arrows
+    "javascript.updateImportsOnFileMove.enabled": "always", // Update imports when file moves
 
-    // Terminal
-    "terminal.integrated.cursorStyle": "line", // Cursor style
-    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font
+    // Terminal settings
+    "terminal.integrated.cursorStyle": "line", // Terminal cursor style
+    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace", // Terminal font
 
-    // Python
+    // Python settings
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8", // Default formatter
+        "editor.defaultFormatter": "ms-python.autopep8", // Python formatter
         "editor.formatOnSave": true // Format on save
     },
-    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Default interpreter path
+    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
 
-    // Luau
-    "luau-lsp.plugin.port": 34872, // TCP port (default: 34872) used by the Luau Language Server Plugin
+    // Luau settings
+    "luau-lsp.plugin.port": 34872, // Luau LSP TCP port
 
-    // Live Server
-    // "liveServer.settings.CustomBrowser": "microsoft-edge", // Custom browser
-    // "liveServer.settings.port": 0, // Port
+    // Live Server settings
+    // "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
+    // "liveServer.settings.port": 0, // Set custom port
 
-    // Git
-    "git.autofetch": true,
+    // Git settings
+    "git.autofetch": true, // Auto fetch git
 
-    // Code Runner
+    // Code Runner settings
     "code-runner.executorMap": {
-        "javascript": "node",
-        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "zig": "zig run",
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "php": "php",
-        "python": "python -u",
-        "perl": "perl",
-        "perl6": "perl6",
-        "ruby": "ruby",
-        "go": "go run",
-        "lua": "lua",
-        "groovy": "groovy",
-        "powershell": "powershell -ExecutionPolicy ByPass -File",
-        "bat": "cmd /c",
-        "shellscript": "bash",
-        "fsharp": "fsi",
-        "csharp": "scriptcs",
-        "vbscript": "cscript //Nologo",
-        "typescript": "tsx",
-        "coffeescript": "coffee",
-        "scala": "scala",
-        "swift": "swift",
-        "julia": "julia",
-        "crystal": "crystal",
-        "ocaml": "ocaml",
-        "r": "Rscript",
-        "applescript": "osascript",
-        "clojure": "lein exec",
-        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
-        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
-        "racket": "racket",
-        "scheme": "csi -script",
-        "ahk": "autohotkey",
-        "autoit": "autoit3",
-        "dart": "dart",
-        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
-        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
-        "haskell": "runghc",
-        "nim": "nim compile --verbosity:0 --hints:off --run",
-        "lisp": "sbcl --script",
-        "kit": "kitc --run",
-        "v": "v run",
-        "sass": "sass --style expanded",
-        "scss": "scss --style expanded",
-        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
-        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "sml": "cd $dir && sml $fileName",
-        "mojo": "mojo run",
-        "erlang": "escript",
-        "spwn": "spwn build",
-        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
-        "gleam": "gleam run -m $fileNameWithoutExt"
-    }, // Executor map
+        "javascript": "node", // JavaScript executor
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt", // Java executor
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // C executor
+        "zig": "zig run", // Zig executor
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // C++ executor
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Objective-C executor
+        "php": "php", // PHP executor
+        "python": "python -u", // Python executor
+        "perl": "perl", // Perl executor
+        "perl6": "perl6", // Perl6 executor
+        "ruby": "ruby", // Ruby executor
+        "go": "go run", // Go executor
+        "lua": "lua", // Lua executor
+        "groovy": "groovy", // Groovy executor
+        "powershell": "powershell -ExecutionPolicy ByPass -File", // PowerShell executor
+        "bat": "cmd /c", // Batch executor
+        "shellscript": "bash", // Shell script executor
+        "fsharp": "fsi", // F# executor
+        "csharp": "scriptcs", // C# executor
+        "vbscript": "cscript //Nologo", // VBScript executor
+        "typescript": "tsx", // TypeScript executor
+        "coffeescript": "coffee", // CoffeeScript executor
+        "scala": "scala", // Scala executor
+        "swift": "swift", // Swift executor
+        "julia": "julia", // Julia executor
+        "crystal": "crystal", // Crystal executor
+        "ocaml": "ocaml", // OCaml executor
+        "r": "Rscript", // R executor
+        "applescript": "osascript", // AppleScript executor
+        "clojure": "lein exec", // Clojure executor
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt", // Haxe executor
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt", // Rust executor
+        "racket": "racket", // Racket executor
+        "scheme": "csi -script", // Scheme executor
+        "ahk": "autohotkey", // AutoHotkey executor
+        "autoit": "autoit3", // AutoIt executor
+        "dart": "dart", // Dart executor
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt", // Pascal executor
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt", // D executor
+        "haskell": "runghc", // Haskell executor
+        "nim": "nim compile --verbosity:0 --hints:off --run", // Nim executor
+        "lisp": "sbcl --script", // Lisp executor
+        "kit": "kitc --run", // Kit executor
+        "v": "v run", // V executor
+        "sass": "sass --style expanded", // SASS executor
+        "scss": "scss --style expanded", // SCSS executor
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css", // LESS executor
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fortran executor
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Modern Fortran executor
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fixed-form Fortran executor
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fortran executor
+        "sml": "cd $dir && sml $fileName", // SML executor
+        "mojo": "mojo run", // Mojo executor
+        "erlang": "escript", // Erlang executor
+        "spwn": "spwn build", // Spwn executor
+        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml", // PKL executor
+        "gleam": "gleam run -m $fileNameWithoutExt" // Gleam executor
+    }, // Code Runner executor map
     "code-runner.runInTerminal": true, // Run in terminal
-    "code-runner.saveFileBeforeRun": true // Save file before execution
+    "code-runner.saveFileBeforeRun": true, // Save file before running
+
+    // Global profile settings
+    "workbench.settings.applyToAllProfiles": [] // Apply to all profiles
 }
