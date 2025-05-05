@@ -1,4 +1,7 @@
 {
+    // Global profile settings
+    "workbench.settings.applyToAllProfiles": [],
+    
     // Workbench settings
     "workbench.iconTheme": "charmed-icons", // Icon theme
     "window.autoDetectColorScheme": true, // Auto detect color scheme
@@ -115,7 +118,7 @@
     }, // Code Runner executor map
     "code-runner.runInTerminal": true, // Run in terminal
     "code-runner.saveFileBeforeRun": true, // Save file before running
-
-    // Global profile settings
-    "workbench.settings.applyToAllProfiles": []
+    
+    // TODO Tree settings
+    "todo-tree.general.statusBar": "total" // Display total number of TODOs in the status bar
 }
