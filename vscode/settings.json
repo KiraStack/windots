@@ -34,6 +34,9 @@
     },
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Default interpreter path
 
+    // Luau
+    "luau-lsp.plugin.port": 34872, // TCP port (default: 34872) used by the Luau Language Server Plugin
+
     // Live Server
     // "liveServer.settings.CustomBrowser": "microsoft-edge", // Custom browser
     // "liveServer.settings.port": 0, // Port
