@@ -16,7 +16,7 @@
     "editor.cursorSmoothCaretAnimation": "on", // Smooth caret animation
     "editor.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font family
     "editor.fontLigatures": true, // Enable font ligatures
-    "editor.formatOnSave": false, // Disable format on save
+    "editor.formatOnSave": true, // Disable format on save
     "editor.defaultFormatter": "esbenp.prettier-vscode", // Default code formatter
 
     // Prettier settings
@@ -34,20 +34,19 @@
     // Python settings
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8", // Python formatter
-        "editor.formatOnSave": true // Format on save
     },
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
 
     // Lua settings
     "[lua]": {
         "editor.defaultFormatter": "JohnnyMorganz.stylua", // Lua formatter
-        "editor.formatOnSave": true // Format on save
     },
     "[luau]": {
         "editor.defaultFormatter": "JohnnyMorganz.stylua", // Luau formatter
-        "editor.formatOnSave": true // Format on save
     },
     "luau-lsp.plugin.port": 34872, // Luau LSP TCP port
+    "luau-lsp.require.mode": "relativeToFile", // Module resolution mode
+      
 
     // Live Server settings
     // "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
@@ -120,5 +119,6 @@
     "code-runner.saveFileBeforeRun": true, // Save file before running
     
     // TODO Tree settings
-    "todo-tree.general.statusBar": "total" // Display total number of TODOs in the status bar
+    "todo-tree.general.statusBar": "total",
+    "security.workspace.trust.untrustedFiles": "open" // Display total number of TODOs in the status bar
 }
