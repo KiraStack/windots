@@ -1,7 +1,7 @@
 {
     // Global profile settings
     "workbench.settings.applyToAllProfiles": [],
-    
+
     // Workbench settings
     "workbench.iconTheme": "charmed-icons", // Icon theme
     "window.autoDetectColorScheme": true, // Auto detect color scheme
@@ -33,24 +33,13 @@
 
     // Python settings
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8", // Python formatter
+        "editor.defaultFormatter": "ms-python.autopep8" // Python formatter
     },
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
 
-    // Lua settings
-    "[lua]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua", // Lua formatter
-    },
-    "[luau]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua", // Luau formatter
-    },
-    "luau-lsp.plugin.port": 34872, // Luau LSP TCP port
-    "luau-lsp.require.mode": "relativeToFile", // Module resolution mode
-      
-
     // Live Server settings
-    // "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
-    // "liveServer.settings.port": 0, // Set custom port
+    "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
+    "liveServer.settings.port": 0, // Set custom port
 
     // Git settings
     "git.autofetch": true, // Auto fetch git
@@ -117,8 +106,7 @@
     }, // Code Runner executor map
     "code-runner.runInTerminal": true, // Run in terminal
     "code-runner.saveFileBeforeRun": true, // Save file before running
-    
+
     // TODO Tree settings
-    "todo-tree.general.statusBar": "total",
-    "security.workspace.trust.untrustedFiles": "open" // Display total number of TODOs in the status bar
+    "todo-tree.general.statusBar": "total" // Display total number of TODOs in the status bar
 }
