@@ -1,0 +1,63 @@
+// Installed apps:
+[
+  {
+    "Name": "@{Name=docker;",
+    "Version": "Updated=05/09/2025"
+  },
+  {
+    "Name": "@{Name=fastfetch;",
+    "Version": "Updated=03/01/2025"
+  },
+  {
+    "Name": "@{Name=ffmpeg;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=fzf;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=gcc;",
+    "Version": "Updated=03/01/2025"
+  },
+  {
+    "Name": "@{Name=git;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=make;",
+    "Version": "Updated=03/01/2025"
+  },
+  {
+    "Name": "@{Name=neovim;",
+    "Version": "Updated=04/19/2025"
+  },
+  {
+    "Name": "@{Name=ntop;",
+    "Version": "Updated=03/01/2025"
+  },
+  {
+    "Name": "@{Name=pandoc;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=poppler;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=rga;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=ripgrep;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=starship;",
+    "Version": "Updated=04/06/2025"
+  },
+  {
+    "Name": "@{Name=zig;",
+    "Version": "Updated=03/01/2025"
+  }
+]

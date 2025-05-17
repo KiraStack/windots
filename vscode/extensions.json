@@ -1,0 +1,80 @@
+[
+  {
+    "id": "ms-python.debugpy",
+    "version": "2025.6.0",
+    "platform": "win32-x64",
+    "publisher": "ms-python"
+  },
+  {
+    "id": "ms-python.autopep8",
+    "version": "2024.2.0",
+    "platform": "universal",
+    "publisher": "ms-python"
+  },
+  {
+    "id": "esbenp.prettier-vscode",
+    "version": "11.0.0",
+    "platform": "universal",
+    "publisher": "esbenp"
+  },
+  {
+    "id": "ms-python.python",
+    "version": "2025.4.0",
+    "platform": "universal",
+    "publisher": "ms-python"
+  },
+  {
+    "id": "formulahendry.code-runner",
+    "version": "0.12.2",
+    "platform": "universal",
+    "publisher": "formulahendry"
+  },
+  {
+    "id": "gruntfuggly.todo-tree",
+    "version": "0.0.215",
+    "platform": "universal",
+    "publisher": "Gruntfuggly"
+  },
+  {
+    "id": "littensy.charmed-icons",
+    "version": "0.8.1",
+    "platform": "universal",
+    "publisher": "littensy"
+  },
+  {
+    "id": "enkia.tokyo-night",
+    "version": "1.1.2",
+    "platform": "universal",
+    "publisher": "enkia"
+  },
+  {
+    "id": "ritwickdey.liveserver",
+    "version": "5.7.9",
+    "platform": "universal",
+    "publisher": "ritwickdey"
+  },
+  {
+    "id": "johnnymorganz.luau-lsp",
+    "version": "1.46.0",
+    "platform": "win32-x64",
+    "publisher": "JohnnyMorganz"
+  },
+  {
+    "id": "kevingamer3d2.selene-vscode",
+    "version": "1.5.2",
+    "platform": "universal",
+    "publisher": "KevinGamer3D2"
+  },
+  {
+    "id": "johnnymorganz.stylua",
+    "version": "1.7.1",
+    "platform": "universal",
+    "publisher": "JohnnyMorganz"
+  },
+  {
+    "id": "icrawl.discord-vscode",
+    "version": "5.9.2",
+    "platform": "universal",
+    "publisher": "icrawl"
+  }
+]

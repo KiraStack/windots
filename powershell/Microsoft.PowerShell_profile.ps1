@@ -1,22 +1,47 @@
-Invoke-Expression (&starship init powershell) # Initialize Starship prompt
-# Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView # Enable predictions
+# Initialize Starship prompt
+Invoke-Expression (&starship init powershell)
 
-# Clear command history
-function Remove-History {
-    Remove-Item (Get-PSReadlineOption).HistorySavePath -Force
+# Enable prediction suggestions
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
+
+# Clear PSReadLine history
+function rmhist {
+    Remove-Item (Get-PSReadLineOption).HistorySavePath -Force
 }
 
-# Show system uptime
-function Get-Uptime {
-    $u = New-TimeSpan -Start (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
-    Write-Host "Uptime: " -NoNewline -ForegroundColor Green
-    Write-Host "$("{0:D2}" -f $u.Days):$("{0:D2}" -f $u.Hours):$("{0:D2}" -f $u.Minutes):$("{0:D2}" -f $u.Seconds)"
+# Display system uptime
+function uptime {
+    $t = New-TimeSpan -Start (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
+    Write-Host "(!) Uptime: $("{0:D2}:{1:D2}:{2:D2}:{3:D2}" -f $t.Days, $t.Hours, $t.Minutes, $t.Seconds)" -ForegroundColor Green
 }
 
-# Custom prompt function
+# Start Roblox Studio RPC
+function rbx-rpc {
+    $exe = 'C:\Program Files\StudioPresence-Windows\studiopresence-win.exe'
+    if (Test-Path $exe) {
+        Start-Process $exe
+        Write-Host "(!) RPC started." -ForegroundColor Green
+    } else {
+        Write-Host "(!!) RPC not found at: $exe" -ForegroundColor Red
+    }
+}
+
+# Export installed Scoop packages as JSON
+function scoop-export {
+    $packages = scoop list | Select-Object -Skip 2 | ForEach-Object {
+        $parts = ($_ -split '\s+')[0..1]
+        [PSCustomObject]@{
+            Name    = $parts[0]
+            Version = $parts[1]
+        }
+    }
+    $packages | ConvertTo-Json -Depth 3
+}
+
+# Custom prompt (optional)
 # function prompt {
-#    $path = $(Get-Location).Path.ToLower() -replace '^([a-z]):', '/$1' -replace '\\', '/' # Unix-style path
-#    Write-Host "`n$path" -ForegroundColor Green # Print path
-#    Write-Host ">" -NoNewline -ForegroundColor Green # Prompt symbol
-#    return " "  # Ensures no unwanted extra prompt symbols
+#     $p = (Get-Location).Path.ToLower() -replace '^([a-z]):', '/$1' -replace '\\', '/'
+#     Write-Host "`n$p" -ForegroundColor Green
+#     Write-Host ">" -NoNewline -ForegroundColor Green
+#     return " "
 # }

@@ -37,6 +37,11 @@
     },
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
 
+    // Lua settings
+    "[luau]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+
     // Live Server settings
     "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
     "liveServer.settings.port": 0, // Set custom port
@@ -106,6 +111,7 @@
     }, // Code Runner executor map
     "code-runner.runInTerminal": true, // Run in terminal
     "code-runner.saveFileBeforeRun": true, // Save file before running
+    "code-runner.clearPreviousOutput": true, // Clear previous output before execution
 
     // TODO Tree settings
     "todo-tree.general.statusBar": "total" // Display total number of TODOs in the status bar
