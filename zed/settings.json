@@ -30,6 +30,12 @@
         "dark": "Tokyo Night Storm" // Theme for dark mode
     },
 
+    "icon_theme": {
+        "mode": "system", // Follow system light/dark mode setting
+        "light": "Charmed Icons", // Icon theme for light mode
+        "dark": "Charmed Icons" // Icon theme for dark mode
+    },
+
     "languages": {
         "Python": {
             "format_on_save": "on", // Enable auto-formatting for Python
