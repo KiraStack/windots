@@ -1,63 +1,54 @@
 // Installed apps:
-[
-  {
-    "Name": "@{Name=docker;",
-    "Version": "Updated=05/09/2025"
-  },
-  {
-    "Name": "@{Name=fastfetch;",
-    "Version": "Updated=03/01/2025"
-  },
-  {
-    "Name": "@{Name=ffmpeg;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=fzf;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=gcc;",
-    "Version": "Updated=03/01/2025"
-  },
-  {
-    "Name": "@{Name=git;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=make;",
-    "Version": "Updated=03/01/2025"
-  },
-  {
-    "Name": "@{Name=neovim;",
-    "Version": "Updated=04/19/2025"
-  },
-  {
-    "Name": "@{Name=ntop;",
-    "Version": "Updated=03/01/2025"
-  },
-  {
-    "Name": "@{Name=pandoc;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=poppler;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=rga;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=ripgrep;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=starship;",
-    "Version": "Updated=04/06/2025"
-  },
-  {
-    "Name": "@{Name=zig;",
-    "Version": "Updated=03/01/2025"
-  }
-]
+{
+    "apps": [
+        {
+            "Source": "main",
+            "Name": "cowsay",
+            "Updated": "2025-05-12T08:59:18.7892385+01:00",
+            "Version": "0.2013.07.19",
+            "Info": "",
+        },
+        {
+            "Source": "main",
+            "Name": "fastfetch",
+            "Updated": "2025-03-01T08:40:25.5394812+00:00",
+            "Version": "2.37.0",
+            "Info": "",
+        },
+        {
+            "Source": "main",
+            "Name": "neovim",
+            "Updated": "2025-04-19T10:43:26.5625347+01:00",
+            "Version": "0.11.0",
+            "Info": "",
+        },
+        {
+            "Source": "main",
+            "Name": "ntop",
+            "Updated": "2025-03-01T08:39:59.2857899+00:00",
+            "Version": "0.3.21",
+            "Info": "",
+        },
+        {
+            "Source": "extras",
+            "Name": "zed",
+            "Updated": "2025-05-18T16:23:35.7078877+01:00",
+            "Version": "0.186.9",
+            "Info": "",
+        },
+    ],
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main.git",
+            "Updated": "2025-05-18T15:18:00+01:00",
+            "Manifests": 1385,
+        },
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": "2025-05-18T13:31:07+01:00",
+            "Manifests": 2165,
+        },
+    ],
+}

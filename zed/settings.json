@@ -26,8 +26,8 @@
 
     "theme": {
         "mode": "system", // Follow system light/dark mode setting
-        "light": "One Light", // Theme for light mode
-        "dark": "One Dark" // Theme for dark mode
+        "light": "Tokyo Night Light", // Theme for light mode
+        "dark": "Tokyo Night Storm" // Theme for dark mode
     },
 
     "languages": {
