@@ -26,8 +26,8 @@
 
     "theme": {
         "mode": "system", // Follow system light/dark mode setting
-        "light": "Tokyo Night Light", // Theme for light mode
-        "dark": "Tokyo Night Storm" // Theme for dark mode
+        "light": "Tokyo Night Storm", // Theme for light mode
+        "dark": "Tokyo Night" // Theme for dark mode
     },
 
     "icon_theme": {
