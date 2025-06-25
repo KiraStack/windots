@@ -3,10 +3,19 @@ return {
 		"williamboman/mason.nvim",
 		event = "VeryLazy", -- Load after full startup
 		dependencies = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim" },
-
 		opts = {
 			-- Constants
-			servers = { "pyright" },
+			-- List of servers to be installed and configured
+			servers = {
+				"lua_ls",     	-- Lua language server (LSP)
+				"stylua",      	-- Lua formatter
+
+				"clangd",      	-- C/C++ LSP
+				"clang-format",	-- C/C++ formatter
+
+				"pyright",     	-- Python LSP
+				"black"        	-- Python formatter
+			}
 
 			-- Functions
 			-- Configure the server settings for servers
@@ -86,7 +95,11 @@ return {
 			{ "<leader>rn", "<cmd>lua require('renamer').rename()<cr>", mode = "v", desc = "Rename in visual mode" },
 		},
 		config = function()
-			require("renamer").setup()
+			-- Load renamer
+			local renamer = require("renamer")
+
+			-- Apply custom options
+			renamer.setup()
 		end,
 	},
 	{
