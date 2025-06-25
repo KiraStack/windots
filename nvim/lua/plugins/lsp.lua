@@ -7,15 +7,16 @@ return {
 			-- Constants
 			-- List of servers to be installed and configured
 			servers = {
-				"lua_ls",     	-- Lua language server (LSP)
-				"stylua",      	-- Lua formatter
-
-				"clangd",      	-- C/C++ LSP
-				"clang-format",	-- C/C++ formatter
-
-				"pyright",     	-- Python LSP
-				"black"        	-- Python formatter
-			}
+				"clangd", -- C/C++
+				"cssls", -- CSS
+				-- "gopls", -- Go
+				"html", -- HTML
+				"jdtls", -- Java
+				"ts_ls", -- TypeScript/JavaScript
+				"lua_ls", -- Lua
+				"pyright", -- Python
+				"rust_analyzer", -- Rust
+			},
 
 			-- Functions
 			-- Configure the server settings for servers

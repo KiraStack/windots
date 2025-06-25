@@ -1,3 +1,6 @@
+# Constants
+$Global:EnableShowHeader = $true  # Global toggle for showing header automatically
+
 # Enable prediction suggestions
 # Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
 
@@ -78,5 +81,18 @@ function show-header {
     }
 }
 
-# Call the function at startup
-show-header
+# Override Clear-Host to show header after clearing
+function Clear-Host {
+    # Clear the console
+    [System.Console]::Clear()
+
+    # Display the ASCII header if enabled
+    if ($Global:EnableShowHeader) {
+        show-header
+    }
+}
+
+# Call show-header on startup only if enabled
+if ($Global:EnableShowHeader) {
+    show-header
+}

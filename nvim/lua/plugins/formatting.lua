@@ -5,9 +5,16 @@ return {
 		opts = {
 			-- Formatters by filetype
 			formatters_by_ft = {
-				python = { "black" },
-				lua = { "stylua" },
+				c = { "clang-format" },
+				css = { "prettierd" },
+				go = { "gofmt" },
+				html = { "prettierd" },
+				java = { "google-java-format" },
 				javascript = { "prettierd" },
+				lua = { "selene" },
+				python = { "ruff" },
+				rust = { "rustfmt" },
+				typescript = { "prettierd" },
 			},
 
 			-- Enable format on save

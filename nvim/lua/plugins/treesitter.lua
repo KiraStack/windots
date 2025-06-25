@@ -5,7 +5,7 @@ return {
         build = ':TSUpdate',
         config = function()
 			local configs = require('nvim-treesitter.configs')
-			local servers = {'python'}
+			local servers = { 'c', 'css', 'go', 'html', 'java', 'javascript', 'lua', 'python', 'rust', 'typescript' }
 			
             configs.setup({
                 ensure_installed = servers,
