@@ -1,40 +1,28 @@
 return {
 	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
+		"kyomi",
+		dir = vim.fn.stdpath("config") .. "/", -- Path to the theme directory
+		lazy = false, -- Load immediately
+		priority = 10000, -- Highest priority to load before everything else
 		config = function()
-			-- Load the colorscheme
-			vim.cmd.colorscheme("tokyonight-storm")
+			-- Load the theme
+			local theme = require("kyomi")
+
+			-- Apply custom options
+			theme.setup()
 		end,
 	},
 	{
 		"zaldih/themery.nvim",
-		cmd = "Themery", -- Load when the :Themery command is run
+		cmd = "Themery",
 		keys = {
-			-- Toggle theme with <leader>ct (C-t)
-			{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
+			{ "<leader>ct", "<cmd>Themery<CR>", desc = "Toggle theme" },
 		},
 		opts = {
-			-- Custom themes to be available for selection
 			themes = {
-				{ name = "Night", colorscheme = "tokyonight-night" },
-				{ name = "Storm", colorscheme = "tokyonight-storm" },
-				{ name = "Day", colorscheme = "tokyonight-day" },
-				{ name = "Moon", colorscheme = "tokyonight-moon" },
-
-				-- Add more themes as needed...
+				{ name = "Kyomi", colorscheme = "kyomi" },
 			},
+			livePreview = true,
 		},
-		config = function(_, opts)
-			-- Load themery
-			local themery = require("themery")
-
-			-- Apply custom options
-			themery.setup({
-				themes = opts.themes, -- Set custom themes
-				livePreview = true, -- Enable live preview
-			})
-		end,
 	},
 }
