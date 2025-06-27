@@ -20,6 +20,9 @@ local themes = {
 -- Set the theme to override the default
 local override_theme = nil
 
+-- Set window background opacity
+config.window_background_opacity = 0.95
+
 -- Auxiliary
 -- Resolve the theme based on the current appearance
 local function resolve_scheme()
