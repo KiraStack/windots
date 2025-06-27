@@ -1,54 +1,82 @@
-// Installed apps:
 {
-    "apps": [
-        {
-            "Source": "main",
-            "Name": "cowsay",
-            "Updated": "2025-05-12T08:59:18.7892385+01:00",
-            "Version": "0.2013.07.19",
-            "Info": "",
-        },
-        {
-            "Source": "main",
-            "Name": "fastfetch",
-            "Updated": "2025-03-01T08:40:25.5394812+00:00",
-            "Version": "2.37.0",
-            "Info": "",
-        },
-        {
-            "Source": "main",
-            "Name": "neovim",
-            "Updated": "2025-04-19T10:43:26.5625347+01:00",
-            "Version": "0.11.0",
-            "Info": "",
-        },
-        {
-            "Source": "main",
-            "Name": "ntop",
-            "Updated": "2025-03-01T08:39:59.2857899+00:00",
-            "Version": "0.3.21",
-            "Info": "",
-        },
-        {
-            "Source": "extras",
-            "Name": "zed",
-            "Updated": "2025-05-18T16:23:35.7078877+01:00",
-            "Version": "0.186.9",
-            "Info": "",
-        },
-    ],
     "buckets": [
         {
             "Name": "main",
-            "Source": "https://github.com/ScoopInstaller/Main.git",
-            "Updated": "2025-05-18T15:18:00+01:00",
-            "Manifests": 1385,
+            "Source": "https://github.com/ScoopInstaller/Main",
+            "Updated": {
+                "value": "/Date(1750984901000)/",
+                "DisplayHint": 2,
+                "DateTime": "27 June 2025 01:41:41"
+            },
+            "Manifests": 1391
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": "2025-05-18T13:31:07+01:00",
-            "Manifests": 2165,
-        },
+            "Updated": {
+                "value": "/Date(1750998587000)/",
+                "DisplayHint": 2,
+                "DateTime": "27 June 2025 05:29:47"
+            },
+            "Manifests": 2169
+        }
     ],
+    "apps": [
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "ani-cli",
+            "Version": "4.10",
+            "Updated": "/Date(1751002336441)/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "autoclicker",
+            "Version": "1.0.0.2",
+            "Updated": "/Date(1749984467850)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "btop",
+            "Version": "1.0.4",
+            "Updated": "/Date(1751001536656)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "cmake",
+            "Version": "4.0.2",
+            "Updated": "/Date(1749676829113)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "cowsay",
+            "Version": "0.2013.07.19",
+            "Updated": "/Date(1749501214015)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "fastfetch",
+            "Version": "2.45.0",
+            "Updated": "/Date(1749498552957)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "neovim",
+            "Version": "0.11.2",
+            "Updated": "/Date(1749499401785)/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "ntop",
+            "Version": "0.3.21",
+            "Updated": "/Date(1749498549091)/"
+        }
+    ]
 }
