@@ -1,5 +1,17 @@
 return {
 	{
+		"folke/todo-comments.nvim",
+		event = "BufReadPost", -- Load when a buffer is read
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			-- Load todo-comments
+			local todo_comments = require("todo-comments")
+
+			-- Apply custom options
+			todo_comments.setup()
+		end,
+	},
+	{
 		"windwp/nvim-ts-autotag",
 		event = "BufReadPost", -- Load when a buffer is read
 		config = function()

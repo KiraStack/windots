@@ -1,5 +1,12 @@
 return {
-
+	{
+		"folke/twilight.nvim",
+		event = "BufReadPost", -- Load when a buffer is read
+		config = function()
+			-- Run a command on startup
+			vim.cmd("TwilightEnable")
+		end,
+	},
 	{
 
 		"folke/tokyonight.nvim",
