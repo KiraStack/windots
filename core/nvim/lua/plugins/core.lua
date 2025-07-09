@@ -517,6 +517,24 @@ return {
             -- The function to attach to the LSP client
             on_attach = function(client, bufnr)
                 require("nvim-navic").attach(client, bufnr) -- Attach nvim-navic
+
+                -- Define diagnostic icons
+                local diagnostic_icons = {
+                    Error = 'E', -- previous value: ''
+                    Warn  = 'W', -- previous value: ''
+                    Info  = 'I', -- previous value: ''
+                    Hint  = 'H', -- previous value: ''
+                }
+
+                -- Configure signs and virtual text for diagnostics
+                for severity, icon in pairs(diagnostic_icons) do
+                    local highlight_group = 'DiagnosticVirtualText' .. severity .. 'Border'
+                    vim.fn.sign_define('DiagnosticSign' .. severity, {
+                        text = icon,
+                        texthl = highlight_group,
+                        numhl = highlight_group,
+                    })
+                end
             end,
         },
         keys = {

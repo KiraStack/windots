@@ -47,6 +47,12 @@ local function format(content, highlight_group, left_pad, right_pad)
     -- Check arguments
     assert(type(content) == "string", "content must be a string")
 
+    -- Check if content is empty
+    if content == "" then
+        -- Return empty string
+        return ""
+    end
+
     -- Default values
     left_pad = left_pad or " "
     right_pad = right_pad or " "
@@ -143,13 +149,13 @@ function module.git_diff(highlight_group)
     end
 
     -- Replace icons
-    status = status
-        :gsub("+", " ")
-        :gsub("-", " ")
-        :gsub("~", " ")
+    -- status = status
+    --     :gsub("+", " ")
+    --     :gsub("-", " ")
+    --     :gsub("~", " ")
 
     -- Return formatted string
-    return format(status, highlight_group)
+    return format(string.format('[%s]', status), highlight_group)
 end
 
 -- ╭──────────────────────────────────────────────────────────────╮
@@ -180,33 +186,25 @@ function module.diagnostics()
     end
 
     -- Get icons and highlight groups
-    local icons = {
-        [severity.ERROR] = " ",
-        [severity.WARN]  = " ",
-        [severity.INFO]  = "󰝶 ",
-        [severity.HINT]  = " ",
-    }
-
-    -- Get highlight groups
-    local groups = {
-        [severity.ERROR] = "DiagnosticError",
-        [severity.WARN]  = "DiagnosticWarn",
-        [severity.INFO]  = "DiagnosticInfo",
-        [severity.HINT]  = "DiagnosticHint",
+    local symbols = {
+        [severity.ERROR] = { icon = "", hl = "DiagnosticError" },
+        [severity.WARN]  = { icon = "", hl = "DiagnosticWarn" },
+        [severity.INFO]  = { icon = "󰝶", hl = "DiagnosticInfo" },
+        [severity.HINT]  = { icon = "", hl = "DiagnosticHint" },
     }
 
     local tokens = {} -- Parts of formatted string
 
     -- Iterate over severity counts
-    for severity, cnt in pairs(counts) do
+    for sev, cnt in pairs(counts) do
         -- Add severity count if greater than zero
         if cnt > 0 then
-            tokens[#tokens + 1] = format(icons[severity] .. cnt, groups[severity])
+            tokens[#tokens + 1] = format(string.format('%s %s', symbols[sev].icon, cnt), symbols[sev].hl)
         end
     end
 
     -- Return formatted string
-    return (#tokens > 0) and (" " .. table.concat(tokens) .. " ") or ""
+    return (#tokens > 0) and table.concat(tokens) or ""
 end
 
 -- ╭──────────────────────────────────────────────────────────────╮
@@ -306,7 +304,8 @@ function module.file_name(highlight_group)
     end
 
     -- Return formatted string
-    return format(icon, icon_hl) .. format(name, highlight_group)
+    return format(icon, highlight_group) .. format(name, highlight_group)
+    -- previous value: format(icon, icon_hl) .. format(name, highlight_group)
 end
 
 -- Returns formatted count of other listed buffers excluding current buffer
@@ -361,17 +360,17 @@ module.statusline = table.concat({
     create("git_branch", "Changed"),    -- Git branch
     create("file_name", "Normal"),      -- Filename with icon
     create("git_diff", "Type"),         -- Git changes
-    create("diagnostics"),              -- LSP diagnostics
-    create("navic", "Comment"),         -- LSP context
     create("other_buffers", "Comment"), -- Other buffer count
+    -- create("lazy_updates", "String"),   -- Lazy updates
+    create("diagnostics"),              -- LSP diagnostics
+    -- create("navic", "Comment"),         -- LSP context
 
     -- Right-side creates
-    "%=",                                -- Right align
-    -- create("lazy_updates", "String"),    -- Lazy updates
-    create("search_count", "Directory"), -- Search count
-    create("progress", "Special"),       -- Percentage through file
-    create("location", "Changed"),       -- Line:column position
-    create("clock", "Conceal")           -- Current time
+    "%=",                          -- Right align
+    -- create("search_count", "Directory"), -- Search count
+    create("progress", "Special"), -- Percentage through file
+    create("location", "Changed"), -- Line:column position
+    create("clock", "Conceal")     -- Current time
 }, "")
 
 return module
