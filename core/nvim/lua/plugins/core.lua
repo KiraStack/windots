@@ -184,6 +184,8 @@ return {
         opts = {
             formatters_by_ft = {
                 c = { 'clang-format' },
+                cpp = { 'clang-format' },
+                glsl = { 'clang-format' },
                 css = { 'prettierd' },
                 go = { 'gofmt' },
                 html = { 'prettierd' },
