@@ -46,9 +46,6 @@ local host_os = get_os()
 -- }
 
 -- local override_theme = nil
-local opacity = 0.95
--- local transparent_bg = string.format('rgba(22, 24, 26, %.2f)', opacity)
-
 -- local function resolve_scheme()
 --     if override_theme and themes[override_theme] then
 --         return themes[override_theme]
@@ -79,7 +76,7 @@ config.force_reverse_video_cursor = true
 -- ╰──────────────────────────────────────────────────────────────╯
 
 config.window_background_image = (os.getenv('WEZTERM_CONFIG_FILE') or ''):gsub('wezterm.lua', 'bg-blurred.png')
-config.window_background_opacity = opacity
+config.window_background_opacity = 0.8
 config.window_decorations = 'RESIZE'
 config.default_cursor_style = 'SteadyBar'
 config.window_close_confirmation = 'NeverPrompt'
@@ -173,7 +170,7 @@ local function resolve_path(cmd)
 end
 
 local shell = resolve_path("pwsh") or resolve_path("powershell") or "cmd"
-config.default_prog = (host_os == 'windows') and { shell, "-NoLogo" } or { "zsh", "-l" }
+config.default_prog = (host_os == 'windows') and { shell, "-nologo" } or { "zsh", "-l" }
 
 
 -- ╭──────────────────────────────────────────────────────────────╮
