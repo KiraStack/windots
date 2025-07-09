@@ -1,118 +1,194 @@
 {
-    // Global profile settings
-    "workbench.settings.applyToAllProfiles": [],
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Window & Theme Setup                    │
+    // ╰──────────────────────────────────────────────────────────────╯
 
-    // Workbench settings
-    "workbench.iconTheme": "charmed-icons", // Icon theme
-    "window.autoDetectColorScheme": true, // Auto detect color scheme
-    "workbench.preferredLightColorTheme": "Tokyo Night Light", // Light theme preference
-    "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // Dark theme preference
-    "workbench.editor.showTabs": "multiple", // Display tabs
-    "workbench.editor.enablePreview": false, // Disable editor preview
+    // Window
+    "window.autoDetectColorScheme": true,
+    "window.title": "${appName}",
+    "window.menuBarVisibility": "toggle", // hide menu unless Alt pressed
+    "window.titleBarStyle": "custom",
 
-    // Editor settings
-    "editor.cursorBlinking": "expand", // Cursor blinking style
-    "editor.cursorStyle": "line", // Cursor style
-    "editor.cursorSmoothCaretAnimation": "on", // Smooth caret animation
-    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace", // Font family
-    "editor.fontLigatures": true, // Enable font ligatures
-    "editor.formatOnSave": true, // Disable format on save
-    "editor.defaultFormatter": "esbenp.prettier-vscode", // Default code formatter
+    // Theme
+    "workbench.preferredLightColorTheme": "One Dark Pro",
+    "workbench.preferredDarkColorTheme": "One Dark Pro",
+    "workbench.iconTheme": "charmed-icons",
+    "workbench.statusBar.visible": false,
 
-    // Prettier settings
-    "prettier.tabWidth": 4, // Tab width
-    "prettier.singleQuote": true, // Use single quotes
-    "prettier.trailingComma": "all", // Add trailing commas
-    "prettier.arrowParens": "always", // Always use parens for arrow functions
-    "symbols.hidesExplorerArrows": false, // Show explorer arrows
-    "javascript.updateImportsOnFileMove.enabled": "always", // Update imports when file moves
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Editor UI & Behavior                    │
+    // ╰──────────────────────────────────────────────────────────────╯
 
-    // Terminal settings
-    "terminal.integrated.cursorStyle": "line", // Terminal cursor style
-    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace", // Terminal font
+    // Editor
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.showTabs": "multiple",
+    "workbench.editor.labelFormat": "short",
+    "workbench.editor.highlightModifiedTabs": false,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.wrapTabs": false,
+    "workbench.editor.showIcons": false,
+    "editor.lineNumbers": "relative",
+    "workbench.editor.empty.hint": "hidden",
+    "editor.guides.indentation": false,
 
-    // Python settings
+    // UI
+    "breadcrumbs.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.glyphMargin": true,
+    "editor.renderLineHighlight": "none",
+    "workbench.activityBar.location": "top",
+
+    // Explorer
+    "explorer.compactFolders": true,
+    "explorer.autoReveal": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Layout & Panels                         │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Layout
+    "workbench.sideBar.location": "right",
+    "workbench.panel.defaultLocation": "right",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Cursor & Font Settings                  │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Cursor
+    "editor.cursorBlinking": "expand",
+    "editor.cursorStyle": "line",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace",
+    "editor.fontLigatures": true,
+
+    // Terminal
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Formatting & Suggestions                │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Formatting
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.showWords": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+
+    // Prettier
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.arrowParens": "always",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Language Specific Settings              │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Formatters
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8" // Python formatter
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
     },
-    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe", // Python interpreter path
-
-    // Lua settings
-    "[luau]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    "[lua]": {
+        "editor.defaultFormatter": "sumneko.lua"
     },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    // Interpreter Paths
+    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
 
-    // Live Server settings
-    "liveServer.settings.CustomBrowser": "microsoft-edge", // Set custom browser
-    "liveServer.settings.port": 0, // Set custom port
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      File & Git Management                   │
+    // ╰──────────────────────────────────────────────────────────────╯
 
-    // Git settings
-    "git.autofetch": true, // Auto fetch git
+    // Files
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
 
-    // Code Runner settings
+    // Git
+    "git.autofetch": true,
+    "git.inputValidationSubjectLength": 50,
+    "git.decorations.enabled": true,
+
+    // GitLens
+    "gitlens.currentLine.enabled": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Code Runner Configuration               │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Code Runner
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
     "code-runner.executorMap": {
-        "javascript": "node", // JavaScript executor
-        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt", // Java executor
-        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // C executor
-        "zig": "zig run", // Zig executor
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // C++ executor
-        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Objective-C executor
-        "php": "php", // PHP executor
-        "python": "python -u", // Python executor
-        "perl": "perl", // Perl executor
-        "perl6": "perl6", // Perl6 executor
-        "ruby": "ruby", // Ruby executor
-        "go": "go run", // Go executor
-        "lua": "lua", // Lua executor
-        "groovy": "groovy", // Groovy executor
-        "powershell": "powershell -ExecutionPolicy ByPass -File", // PowerShell executor
-        "bat": "cmd /c", // Batch executor
-        "shellscript": "bash", // Shell script executor
-        "fsharp": "fsi", // F# executor
-        "csharp": "scriptcs", // C# executor
-        "vbscript": "cscript //Nologo", // VBScript executor
-        "typescript": "tsx", // TypeScript executor
-        "coffeescript": "coffee", // CoffeeScript executor
-        "scala": "scala", // Scala executor
-        "swift": "swift", // Swift executor
-        "julia": "julia", // Julia executor
-        "crystal": "crystal", // Crystal executor
-        "ocaml": "ocaml", // OCaml executor
-        "r": "Rscript", // R executor
-        "applescript": "osascript", // AppleScript executor
-        "clojure": "lein exec", // Clojure executor
-        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt", // Haxe executor
-        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt", // Rust executor
-        "racket": "racket", // Racket executor
-        "scheme": "csi -script", // Scheme executor
-        "ahk": "autohotkey", // AutoHotkey executor
-        "autoit": "autoit3", // AutoIt executor
-        "dart": "dart", // Dart executor
-        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt", // Pascal executor
-        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt", // D executor
-        "haskell": "runghc", // Haskell executor
-        "nim": "nim compile --verbosity:0 --hints:off --run", // Nim executor
-        "lisp": "sbcl --script", // Lisp executor
-        "kit": "kitc --run", // Kit executor
-        "v": "v run", // V executor
-        "sass": "sass --style expanded", // SASS executor
-        "scss": "scss --style expanded", // SCSS executor
-        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css", // LESS executor
-        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fortran executor
-        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Modern Fortran executor
-        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fixed-form Fortran executor
-        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Fortran executor
-        "sml": "cd $dir && sml $fileName", // SML executor
-        "mojo": "mojo run", // Mojo executor
-        "erlang": "escript", // Erlang executor
-        "spwn": "spwn build", // Spwn executor
-        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml", // PKL executor
-        "gleam": "gleam run -m $fileNameWithoutExt" // Gleam executor
-    }, // Code Runner executor map
-    "code-runner.runInTerminal": true, // Run in terminal
-    "code-runner.saveFileBeforeRun": true, // Save file before running
-    "code-runner.clearPreviousOutput": true, // Clear previous output before execution
-
-    // TODO Tree settings
-    "todo-tree.general.statusBar": "total" // Display total number of TODOs in the status bar
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "zig": "zig run",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "tsx",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runghc",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "sml": "cd $dir && sml $fileName",
+        "mojo": "mojo run",
+        "erlang": "escript",
+        "spwn": "spwn build",
+        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+        "gleam": "gleam run -m $fileNameWithoutExt"
+    },
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
 }

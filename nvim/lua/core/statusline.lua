@@ -6,33 +6,11 @@
 
 local module = {}
 
---  __    __  ________  __        _______   ________  _______    ______
--- |  \  |  \|        \|  \      |       \ |        \|       \  /      \
--- | $$  | $$| $$$$$$$$| $$      | $$$$$$$\| $$$$$$$$| $$$$$$$\|  $$$$$$\
--- | $$__| $$| $$__    | $$      | $$__/ $$| $$__    | $$__| $$| $$___\$$
--- | $$    $$| $$  \   | $$      | $$    $$| $$  \   | $$    $$ \$$    \
--- | $$$$$$$$| $$$$$   | $$      | $$$$$$$ | $$$$$   | $$$$$$$\ _\$$$$$$\
--- | $$  | $$| $$_____ | $$_____ | $$      | $$_____ | $$  | $$|  \__| $$
--- | $$  | $$| $$     \| $$     \| $$      | $$     \| $$  | $$ \$$    $$
---  \$$   \$$ \$$$$$$$$ \$$$$$$$$ \$$       \$$$$$$$$ \$$   \$$  \$$$$$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Constants                                                    │
+-- ╰──────────────────────────────────────────────────────────────╯
 
--- Helper functions
-local function format_component(content, highighlight_groupight_group, left_pad, right_pad)
-    left_pad = left_pad or " "
-    right_pad = right_pad or " "
-    highighlight_groupight_group = highighlight_groupight_group or "Comment"
-    return string.format("%s%%#%s#%s%%*%s", left_pad, highighlight_groupight_group, content, right_pad)
-end
-
-local function component(val, highlight_group)
-    if val == nil or val == "" then return "" end
-    if highlight_group == nil then
-        return "%{%v:lua._statusline_component('" .. val .. "')%}"
-    end
-    return "%{%v:lua._statusline_component('" .. val .. "', '" .. highlight_group .. "')%}"
-end
-
--- Components
+-- Mode map for statusline_bg
 local mode_map = {
     ["n"] = "NORMAL",
     ["no"] = "NORMAL",
@@ -48,7 +26,8 @@ local mode_map = {
     ["nt"] = "TERMINAL",
 }
 
-local mode_highlight_group_map = {
+-- Mode highlight groups map for statusline
+local mode_hl_map = {
     ["NORMAL"] = "Directory",
     ["VISUAL"] = "Number",
     ["V-LINE"] = "Number",
@@ -58,331 +37,341 @@ local mode_highlight_group_map = {
     ["TERMINAL"] = "Keyword",
 }
 
-function _G._statusline_component(name, highlight_group)
-    return module[name](highlight_group)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Helpers                                                      │
+-- ╰──────────────────────────────────────────────────────────────╯
+
+-- Helper functions
+-- Format a statusline segment with optional padding and highlight group
+local function format(content, highlight_group, left_pad, right_pad)
+    -- Check arguments
+    assert(type(content) == "string", "content must be a string")
+
+    -- Default values
+    left_pad = left_pad or " "
+    right_pad = right_pad or " "
+    highlight_group = highlight_group or "Comment"
+
+    -- Return formatted string
+    return string.format("%s%%#%s#%s%%*%s", left_pad, highlight_group, content, right_pad)
 end
 
-function module.get_highlight_groupgroup(name, fallback)
-    if vim.fn.highlight_groupexists(name) == 1 then
-        local group = vim.api.nvim_get_highlight_group(0, { name = name })
-        local highlight_group = {
-            fg = group.fg == nil and "NONE" or string.format("#%x", group.fg),
-            bg = group.bg == nil and "NONE" or string.format("#%x", group.bg),
-        }
-        return highlight_group
+-- Wrapper to call a module statusline function by name with an optional parameter
+function _G.statusline_call(callback, param)
+    return module[callback](param) -- Call statusline function
+end
+
+-- Generates a Vim statusline expression calling a module function with optional highlight
+local function create(content, highlight_group)
+    -- Check arguments
+    assert(type(content) == "string" and content ~= "", "content must be a valid string")
+
+    -- Call statusline function and return formatted string
+    if highlight_group then
+        return string.format("%%{%%v:lua.statusline_call('%s', '%s')%%}", content, highlight_group)
+    else
+        return string.format("%%{%%v:lua.statusline_call('%s')%%}", content)
     end
-    return fallback or {}
 end
 
-function module.get_buffer_count()
+-- Counts and returns the number of listed, normal buffers currently loaded
+function module.get_bufcnt()
+    -- Get buffer count
     local count = 0
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.bo[buf].buflisted and vim.bo[buf].buftype ~= "nofile" then
+    local bufs = vim.api.nvim_list_bufs()
+
+    -- Iterate over buffers
+    for _, buf in ipairs(bufs) do
+        local bufopts = vim.bo[buf] -- Get buffer options
+
+        -- Check if buffer is valid
+        if bufopts.buflisted and bufopts.buftype ~= "nofile" then
             count = count + 1
         end
     end
+
+    -- Return buffer count
     return count
 end
 
-function module.switch_to_other_buffer()
-    if pcall(vim.cmd, "buffer #") then return end
-    if module.get_buffer_count() > 1 then return vim.cmd("bprevious") end
-    vim.notify("No other buffer to switch to!", 3, { title = "Warning" })
-end
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Mode                                                         │
+-- ╰──────────────────────────────────────────────────────────────╯
 
-function module.open_help(buf)
-    if buf ~= nil and vim.bo[buf].filetype == "help" and not vim.bo[buf].modifiable then
-        local help_win = vim.api.nvim_get_current_win()
-        local new_win = vim.api.nvim_open_win(buf, true, {
-            relative = "editor",
-            row = 0,
-            col = vim.o.columns - 80,
-            width = 80,
-            height = vim.o.lines - 3,
-            border = "rounded",
-        })
-        vim.wo[help_win].scroll = vim.wo[new_win].scroll
-        vim.api.nvim_win_close(help_win, true)
-    end
-end
-
-function module.write_to_file(file, lines)
-    if not lines or #lines == 0 then return end
-    local buf = io.open(file, "w")
-    if buf then
-        for _, line in ipairs(lines) do buf:write(line .. "\n") end
-        buf:close()
-    end
-end
-
-function module.toggle_global_boolean(option, description)
-    return require("snacks").toggle({
-        name = description,
-        get = function() return vim.g[option] == nil or vim.g[option] end,
-        set = function(state) vim.g[option] = state end,
-    })
-end
-
-function module.open_terminal_toggle(cmd, fullscreen)
-    local opts = fullscreen and { win = { position = "float", width = 0.99, height = 0.99 } } or nil
-    require("snacks").terminal.toggle(cmd, opts)
-    if vim.bo.filetype == "snacks_terminal" then
-        vim.notify("_Double press `ESC`_ to return to normal mode", 2, { title = cmd[1] })
-    end
-end
-
---  __       __   ______   _______   ________
--- |  \     /  \ /      \ |       \ |        \
--- | $$\   /  $$|  $$$$$$\| $$$$$$$\| $$$$$$$$
--- | $$$\ /  $$$| $$  | $$| $$  | $$| $$__
--- | $$$$\  $$$$| $$  | $$| $$  | $$| $$  \
--- | $$\$$ $$ $$| $$  | $$| $$  | $$| $$$$$
--- | $$ \$$$| $$| $$__/ $$| $$__/ $$| $$_____
--- | $$  \$ | $$ \$$    $$| $$    $$| $$     \
---  \$$      \$$  \$$$$$$  \$$$$$$$  \$$$$$$$$
-
--- Statusline components
-local function get_mode_info()
-    local mode = vim.api.nvim_get_mode().mode
-    local val = mode_map[mode]
-    return val, mode_highlight_group_map[val]
-end
-
+-- Returns the current editor mode as a formatted statusline component
 function module.mode()
-    local val, highlight_group = get_mode_info()
-    return val and format_component(" " .. string.lower(val), highlight_group) or ""
-end
+    -- Get current mode
+    local mode_code = vim.api.nvim_get_mode().mode
+    local mode_name = mode_map[mode_code]
+    local highlight = mode_name and mode_hl_map[mode_name]
 
---   ______   ______  ________
---  /      \ |      \|        \
--- |  $$$$$$\ \$$$$$$ \$$$$$$$$
--- | $$ __\$$  | $$     | $$
--- | $$|    \  | $$     | $$
--- | $$ \$$$$  | $$     | $$
--- | $$__| $$ _| $$_    | $$
---  \$$    $$|   $$ \   | $$
---   \$$$$$$  \$$$$$$    \$$
-
-function module.git_branch(highlight_group)
-    local branch = vim.g.gitsigns_head
-    return branch and format_component(" " .. branch, highlight_group) or ""
-end
-
-function module.git_diff(highlight_group)
-    local summary = vim.b.gitsigns_status
-    if not summary or summary == "" then return "" end
-    return format_component(summary:gsub("+", " "):gsub("-", " "):gsub("~", " "), highlight_group)
-end
-
---  __       __   ______   _______   __    __  ______  __    __   ______
--- |  \  _  |  \ /      \ |       \ |  \  |  \|      \|  \  |  \ /      \
--- | $$ / \ | $$|  $$$$$$\| $$$$$$$\| $$\ | $$ \$$$$$$| $$\ | $$|  $$$$$$\
--- | $$/  $\| $$| $$__| $$| $$__| $$| $$$\| $$  | $$  | $$$\| $$| $$ __\$$
--- | $$  $$$\ $$| $$    $$| $$    $$| $$$$\ $$  | $$  | $$$$\ $$| $$|    \
--- | $$ $$\$$\$$| $$$$$$$$| $$$$$$$\| $$\$$ $$  | $$  | $$\$$ $$| $$ \$$$$
--- | $$$$  \$$$$| $$  | $$| $$  | $$| $$ \$$$$ _| $$_ | $$ \$$$$| $$__| $$
--- | $$$    \$$$| $$  | $$| $$  | $$| $$  \$$$|   $$ \| $$  \$$$ \$$    $$
---  \$$      \$$ \$$   \$$ \$$   \$$ \$$   \$$ \$$$$$$ \$$   \$$  \$$$$$$
-
-
-function module.diagnostics()
-    local diag_severity = vim.diagnostic.severity
-    local counts = {
-        [diag_severity.ERROR] = 0,
-        [diag_severity.WARN] = 0,
-        [diag_severity.INFO] = 0,
-        [diag_severity.HINT] = 0,
-    }
-
-    -- Get counts for each severity level
-    for _, diag in ipairs(vim.diagnostic.get(0)) do
-        counts[diag.severity] = (counts[diag.severity] or 0) + 1
-    end
-
-    -- Only show if there are diagnostics
-    if counts[diag_severity.ERROR] + counts[diag_severity.WARN] +
-        counts[diag_severity.INFO] + counts[diag_severity.HINT] == 0 then
+    -- Check if mode is valid
+    if not mode_name then
         return ""
     end
 
-    -- Build components
-    local components = {
-        counts[diag_severity.ERROR] > 0 and
-        format_component(" " .. counts[diag_severity.ERROR], "DiagnosticError", "") or "",
-        counts[diag_severity.WARN] > 0 and
-        format_component(" " .. counts[diag_severity.WARN], "DiagnosticWarn", "") or "",
-        counts[diag_severity.INFO] > 0 and
-        format_component("󰝶 " .. counts[diag_severity.INFO], "DiagnosticInfo", "") or "",
-        counts[diag_severity.HINT] > 0 and
-        format_component(" " .. counts[diag_severity.HINT], "DiagnosticHint", "") or "",
+    -- Return formatted string
+    return format(" " .. string.lower(mode_name), highlight)
+end
+
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Git                                                          │
+-- ╰──────────────────────────────────────────────────────────────╯
+
+-- Returns the current Git branch formatted with an icon and optional highlight group.
+function module.git_branch(highlight_group)
+    -- Get current Git branch
+    local branch = vim.g.gitsigns_head
+
+    -- Check if branch is valid
+    if not branch then
+        return ""
+    end
+
+    -- Return formatted string
+    return format(" " .. branch, highlight_group)
+end
+
+-- Returns Git diff summary with icons replacing +, -, ~ and optional highlight group.
+function module.git_diff(highlight_group)
+    -- Get Git difference summary status
+    local status = vim.b.gitsigns_status
+
+    -- Check if status is valid
+    if not status or status == "" then
+        return ""
+    end
+
+    -- Replace icons
+    status = status
+        :gsub("+", " ")
+        :gsub("-", " ")
+        :gsub("~", " ")
+
+    -- Return formatted string
+    return format(status, highlight_group)
+end
+
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Diagnostics                                                  │
+-- ╰──────────────────────────────────────────────────────────────╯
+
+-- Returns a formatted string summarizing buffer diagnostics by severity
+function module.diagnostics()
+    -- Shorten diagnostic severity namespace
+    local severity = vim.diagnostic.severity
+
+    -- Severity counts
+    local counts = {
+        [severity.ERROR] = 0,
+        [severity.WARN]  = 0,
+        [severity.INFO]  = 0,
+        [severity.HINT]  = 0,
     }
 
-    return " " .. table.concat(components, "") .. " "
-end
-
---  _______   _______   ________   ______   _______    ______   __    __  __       __  _______    ______
--- |       \ |       \ |        \ /      \ |       \  /      \ |  \  |  \|  \     /  \|       \  /      \
--- | $$$$$$$\| $$$$$$$\| $$$$$$$$|  $$$$$$\| $$$$$$$\|  $$$$$$\| $$  | $$| $$\   /  $$| $$$$$$$\|  $$$$$$\
--- | $$__/ $$| $$__| $$| $$__    | $$__| $$| $$  | $$| $$   \$$| $$  | $$| $$$\ /  $$$| $$__/ $$| $$___\$$
--- | $$    $$| $$    $$| $$  \   | $$    $$| $$  | $$| $$      | $$  | $$| $$$$\  $$$$| $$    $$ \$$    \
--- | $$$$$$$\| $$$$$$$\| $$$$$   | $$$$$$$$| $$  | $$| $$   __ | $$  | $$| $$\$$ $$ $$| $$$$$$$\ _\$$$$$$\
--- | $$__/ $$| $$  | $$| $$_____ | $$  | $$| $$__/ $$| $$__/  \| $$__/ $$| $$ \$$$| $$| $$__/ $$|  \__| $$
--- | $$    $$| $$  | $$| $$     \| $$  | $$| $$    $$ \$$    $$ \$$    $$| $$  \$ | $$| $$    $$ \$$    $$
---  \$$$$$$$  \$$   \$$ \$$$$$$$$ \$$   \$$ \$$$$$$$   \$$$$$$   \$$$$$$  \$$      \$$ \$$$$$$$   \$$$$$$
-
-
-function module.navic(highlight_group)
-    if package.loaded["nvim-navic"] and require("nvim-navic").is_available() then
-        return format_component(require("nvim-navic").get_location(), highlight_group)
+    -- Iterate over diagnostics
+    for _, diagnostic in ipairs(vim.diagnostic.get(0)) do
+        counts[diagnostic.severity] = counts[diagnostic.severity] + 1
     end
-    return ""
-end
 
-function module.status_messages(highlight_group)
-    local ignore = { "-- INSERT --", "-- TERMINAL --", "-- VISUAL --", "-- VISUAL LINE --", "-- VISUAL BLOCK --" }
-    if require("noice").api.status.mode.has() then
-        local mode = require("noice").api.status.mode.get()
-        if not vim.tbl_contains(ignore, mode) then
-            return format_component(mode, highlight_group)
+    -- Check if there are any diagnostics
+    if counts[severity.ERROR] + counts[severity.WARN] + counts[severity.INFO] + counts[severity.HINT] == 0 then
+        return ""
+    end
+
+    -- Get icons and highlight groups
+    local icons = {
+        [severity.ERROR] = " ",
+        [severity.WARN]  = " ",
+        [severity.INFO]  = "󰝶 ",
+        [severity.HINT]  = " ",
+    }
+
+    -- Get highlight groups
+    local groups = {
+        [severity.ERROR] = "DiagnosticError",
+        [severity.WARN]  = "DiagnosticWarn",
+        [severity.INFO]  = "DiagnosticInfo",
+        [severity.HINT]  = "DiagnosticHint",
+    }
+
+    local tokens = {} -- Parts of formatted string
+
+    -- Iterate over severity counts
+    for severity, cnt in pairs(counts) do
+        -- Add severity count if greater than zero
+        if cnt > 0 then
+            tokens[#tokens + 1] = format(icons[severity] .. cnt, groups[severity])
         end
     end
-    return ""
+
+    -- Return formatted string
+    return (#tokens > 0) and (" " .. table.concat(tokens) .. " ") or ""
 end
 
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Breadcrumbs                                                  │
+-- ╰──────────────────────────────────────────────────────────────╯
+
+-- Returns current location from nvim-navic if available and attached
+function module.navic(highlight_group)
+    -- Check if nvim-navic is available
+    if not package.loaded["nvim-navic"] or not require("nvim-navic").is_available() then
+        return ""
+    end
+
+    -- Return formatted string of current location
+    return format(require("nvim-navic").get_location(), highlight_group)
+end
+
+-- Returns formatted lazy.nvim update status if available
 function module.lazy_updates(highlight_group)
+    -- Get updates
     local updates = require("lazy.status").updates()
-    return type(updates) == "string" and format_component(updates, highlight_group) or ""
+
+    -- Check if updates are available
+    if type(updates) ~= "string" then
+        return ""
+    end
+
+    -- Return formatted string
+    return format(updates, highlight_group)
 end
 
+-- Returns formatted search count for current search if active and valid
 function module.search_count(highlight_group)
-    if vim.v.highlight_groupsearch == 0 then return "" end
-    local ok, s_count = pcall(vim.fn.searchcount, { recompute = true })
-    if not ok or s_count.current == nil or s_count.total == 0 then return "" end
-    return format_component(s_count.incomplete == 1 and "?/?" or s_count.current .. "/" .. s_count.total, highlight_group)
+    -- Check if search is active
+    if vim.v.hlsearch == 0 then
+        return ""
+    end
+
+    -- Get search count
+    local status, cnt = pcall(vim.fn.searchcount, { recompute = true })
+    if not status or not cnt.current or cnt.total == 0 then
+        return ""
+    end
+
+    -- Check if search is incomplete
+    if cnt.incomplete == 1 then
+        return format("?/?", highlight_group)
+    end
+
+    -- Return formatted string
+    return format(cnt.current .. "/" .. cnt.total, highlight_group) -- Search is complete
 end
 
---  ________  ______  __        ________
--- |        \|      \|  \      |        \
--- | $$$$$$$$ \$$$$$$| $$      | $$$$$$$$
--- | $$__      | $$  | $$      | $$__
--- | $$  \     | $$  | $$      | $$  \
--- | $$$$$     | $$  | $$      | $$$$$
--- | $$       _| $$_ | $$_____ | $$_____
--- | $$      |   $$ \| $$     \| $$     \
---  \$$       \$$$$$$ \$$$$$$$$ \$$$$$$$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ File                                                         │
+-- ╰──────────────────────────────────────────────────────────────╯
 
+-- Returns formatted file name with icon and highlights, applying overrides for filetypes and filenames
 function module.file_name(highlight_group)
+    -- Define filetype overrides with set properties
     local ft_overrides = {
-        ["copilot-chat"] = { name = "copilot", icon = "󰚩", icon_highlight_group = "MiniIconsAzure" },
-        ["grug-far"] = { name = "grug-far", icon = "", icon_highlight_group = "DiagnosticWarn" },
-        ["lazy"] = { name = "lazy.nvim", icon = "󰒲", icon_highlight_group = "Directory" },
-        ["mason"] = { name = "mason", icon = "󱌣", icon_highlight_group = "MiniIconsAzure" },
-        ["minifiles"] = { name = "files", icon = "󰝰", icon_highlight_group = "Directory" },
-        ["snacks_picker_input"] = { name = "picker", icon = "󰦨", icon_highlight_group = "Changed" },
+        ["copilot-chat"] = { name = "copilot", icon = "󰚩", icon_hl = "MiniIconsAzure" },
+        ["grug-far"] = { name = "grug-far", icon = "", icon_hl = "DiagnosticWarn" },
+        ["lazy"] = { name = "lazy.nvim", icon = "󰒲", icon_hl = "Directory" },
+        ["mason"] = { name = "mason", icon = "󱌣", icon_hl = "MiniIconsAzure" },
+        ["minifiles"] = { name = "files", icon = "󰝰", icon_hl = "Directory" },
+        ["snacks_picker_input"] = { name = "picker", icon = "󰦨", icon_hl = "Changed" },
     }
-
+    -- Define filename overrides with set properties
     local fn_overrides = {
-        ["k9s"] = { icon = "󱃾", icon_highlight_group = "Directory" },
-        ["lazygit"] = { icon = "", icon_highlight_group = "Changed" },
+        ["k9s"] = { icon = "󱃾", icon_hl = "Directory" },
+        ["lazygit"] = { icon = "", icon_hl = "Changed" },
     }
 
-    local ft = vim.bo.filetype
-    if ft_overrides[ft] then
-        return format_component(ft_overrides[ft].icon, ft_overrides[ft].icon_highlight_group, " ", "")
-            .. format_component(ft_overrides[ft].name, highlight_group)
+    -- Check if current buffer is valid
+    if ft_overrides[vim.bo.filetype] then
+        local opt = ft_overrides[vim.bo.filetype]                                 -- Get filetype override
+        return format(opt.icon, opt.icon_hl) .. format(opt.name, highlight_group) -- Return formatted string
     end
 
-    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
-    if filename == "" then return "" end
+    -- Get the current buffer's file name
+    local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
 
-    local icon, icon_highlight_group = require("mini.icons").get("file", filename)
-    if fn_overrides[filename] then
-        icon, icon_highlight_group = fn_overrides[filename].icon, fn_overrides[filename].icon_highlight_group
+    -- Check if name is empty
+    if name == "" then
+        -- Return empty string if name is empty
+        return ""
     end
 
-    return format_component(icon, icon_highlight_group, " ", "") .. format_component(filename, highlight_group)
+    -- Get respective icon and highlight group
+    local icon, icon_hl = require("mini.icons").get("file", name)
+
+    -- Check if icon override is available
+    if fn_overrides[name] then
+        -- Get icon override
+        icon, icon_hl = fn_overrides[name].icon, fn_overrides[name].icon_hl
+    end
+
+    -- Return formatted string
+    return format(icon, icon_hl) .. format(name, highlight_group)
 end
 
+-- Returns formatted count of other listed buffers excluding current buffer
 function module.other_buffers(highlight_group)
-    local other_bufs = module.get_buffer_count() - 1
-    return other_bufs > 0 and format_component("+" .. other_bufs .. " ", highlight_group, "", " ") or ""
+    -- Get buffer count excluding current buffer
+    local bufcnt = module.get_bufcnt() - 1
+
+    -- Check if there are any other buffers
+    if bufcnt <= 0 then
+        return ""
+    end
+
+    -- Return formatted string of buffer count
+    return format(string.format("+%d ", bufcnt), highlight_group)
 end
 
---  _______   _______    ______    ______   _______   ________   ______    ______
--- |       \ |       \  /      \  /      \ |       \ |        \ /      \  /      \
--- | $$$$$$$\| $$$$$$$\|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$|  $$$$$$\|  $$$$$$\
--- | $$__/ $$| $$__| $$| $$  | $$| $$ __\$$| $$__| $$| $$__    | $$___\$$| $$___\$$
--- | $$    $$| $$    $$| $$  | $$| $$|    \| $$    $$| $$  \    \$$    \  \$$    \
--- | $$$$$$$ | $$$$$$$\| $$  | $$| $$ \$$$$| $$$$$$$\| $$$$$    _\$$$$$$\ _\$$$$$$\
--- | $$      | $$  | $$| $$__/ $$| $$__| $$| $$  | $$| $$_____ |  \__| $$|  \__| $$
--- | $$      | $$  | $$ \$$    $$ \$$    $$| $$  | $$| $$     \ \$$    $$ \$$    $$
---  \$$       \$$   \$$  \$$$$$$   \$$$$$$  \$$   \$$ \$$$$$$$$  \$$$$$$   \$$$$$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Progress                                                     │
+-- ╰──────────────────────────────────────────────────────────────╯
 
 
-
--- Line:column position component with file encoding and file format
+-- Line:column position create with file encoding and file format
 function module.progress(highlight_group)
-    return format_component("%2p%%", highlight_group)
+    return format("%2p%%", highlight_group)
 end
 
---  __        ______    ______    ______  ________  ______   ______   __    __
--- |  \      /      \  /      \  /      \|        \|      \ /      \ |  \  |  \
--- | $$     |  $$$$$$\|  $$$$$$\|  $$$$$$\\$$$$$$$$ \$$$$$$|  $$$$$$\| $$\ | $$
--- | $$     | $$  | $$| $$   \$$| $$__| $$  | $$     | $$  | $$  | $$| $$$\| $$
--- | $$     | $$  | $$| $$      | $$    $$  | $$     | $$  | $$  | $$| $$$$\ $$
--- | $$     | $$  | $$| $$   __ | $$$$$$$$  | $$     | $$  | $$  | $$| $$\$$ $$
--- | $$_____| $$__/ $$| $$__/  \| $$  | $$  | $$    _| $$_ | $$__/ $$| $$ \$$$$
--- | $$     \\$$    $$ \$$    $$| $$  | $$  | $$   |   $$ \ \$$    $$| $$  \$$$
---  \$$$$$$$$ \$$$$$$   \$$$$$$  \$$   \$$   \$$    \$$$$$$  \$$$$$$  \$$   \$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Location                                                     │
+-- ╰──────────────────────────────────────────────────────────────╯
 
--- Line:column position component with file encoding and file format
+-- Line:column position create with file encoding and file format
 function module.location(highlight_group)
-    return format_component("%l:%c", highlight_group)
+    return format("%l:%c", highlight_group)
 end
 
---   ______   __        ______    ______   __    __
---  /      \ |  \      /      \  /      \ |  \  /  \
--- |  $$$$$$\| $$     |  $$$$$$\|  $$$$$$\| $$ /  $$
--- | $$   \$$| $$     | $$  | $$| $$   \$$| $$/  $$
--- | $$      | $$     | $$  | $$| $$      | $$  $$
--- | $$   __ | $$     | $$  | $$| $$   __ | $$$$$\
--- | $$__/  \| $$_____| $$__/ $$| $$__/  \| $$ \$$\
---  \$$    $$| $$     \\$$    $$ \$$    $$| $$  \$$\
---   \$$$$$$  \$$$$$$$$ \$$$$$$   \$$$$$$  \$$   \$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Clock                                                        │
+-- ╰──────────────────────────────────────────────────────────────╯
 
--- Clock component with time in 12-hour formatted time with AM/PM
+-- Clock create with time in 12-hour formatted time with AM/PM
 function module.clock(highlight_group)
-    return format_component(os.date("%I:%M %p"):gsub("^0", ""), highlight_group)
+    return format(os.date("%I:%M %p"):gsub("^0", ""), highlight_group)
 end
 
---   ______  ________   ______  ________  __    __  ________   ______
---  /      \|        \ /      \|        \|  \  |  \|        \ /      \
--- |  $$$$$$\\$$$$$$$$|  $$$$$$\\$$$$$$$$| $$  | $$| $$$$$$$$|  $$$$$$\
--- | $$___\$$  | $$   | $$__| $$  | $$   | $$  | $$| $$__    | $$___\$$
---  \$$    \   | $$   | $$    $$  | $$   | $$  | $$| $$  \    \$$    \
---  _\$$$$$$\  | $$   | $$$$$$$$  | $$   | $$  | $$| $$$$$    _\$$$$$$\
--- |  \__| $$  | $$   | $$  | $$  | $$   | $$__/ $$| $$_____ |  \__| $$
---  \$$    $$  | $$   | $$  | $$  | $$    \$$    $$| $$     \ \$$    $$
---   \$$$$$$    \$$    \$$   \$$   \$$     \$$$$$$  \$$$$$$$$  \$$$$$$
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ Statusline                                                   │
+-- ╰──────────────────────────────────────────────────────────────╯
 
 module.statusline = table.concat({
-    -- Left side components
-    component("mode"),                  -- Current Vim mode
-    component("git_branch", "Changed"), -- Git branch
-    component("git_diff", "Type"),      -- Git changes
-    component("diagnostics"),           -- LSP diagnostics
-    component("navic", "Comment"),      -- LSP context
-    "%<",                               -- Truncation point
+    -- Left-side creates
+    create("mode"),                     -- Current Vim mode
+    create("git_branch", "Changed"),    -- Git branch
+    create("file_name", "Normal"),      -- Filename with icon
+    create("git_diff", "Type"),         -- Git changes
+    create("diagnostics"),              -- LSP diagnostics
+    create("navic", "Comment"),         -- LSP context
+    create("other_buffers", "Comment"), -- Other buffer count
 
-    -- Right side components
-    "%=",                                   -- Right align
-    component("lazy_updates", "String"),    -- Lazy updates
-    component("search_count", "Directory"), -- Search count
-    component("file_name", "Normal"),       -- Filename with icon
-    component("other_buffers", "Comment"),  -- Other buffer count
-    component("progress", "Special"),       -- Percentage through file
-    component("location", "Changed"),       -- Line:column position
-    component("clock", "Conceal")           -- Current time
+    -- Right-side creates
+    "%=",                                -- Right align
+    -- create("lazy_updates", "String"),    -- Lazy updates
+    create("search_count", "Directory"), -- Search count
+    create("progress", "Special"),       -- Percentage through file
+    create("location", "Changed"),       -- Line:column position
+    create("clock", "Conceal")           -- Current time
 }, "")
 
 return module
