@@ -1,10 +1,45 @@
--- Settings
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │                          Dotfiles                            │
+-- │                        KiraStack/dots                        │
+-- │                                                              │
+-- │       ~ Minimalist ~ Fast ~ Maintainable ~ Lua-powered ~     │
+-- ╰──────────────────────────────────────────────────────────────╯
+
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠉⠉⠻⣦⡀⠀⠀⠀⠀⠀⣴⠞⠛⠻⣦⡀
+-- ⠀⠀⠀⠀⣤⠤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⠀⠀⠈⣷⠀⠀⠀⢀⡾⠃⠀⠀⠀⠘⣷
+-- ⠀⠀⠀⢰⡇⠀⠹⢦⡤⢤⣄⡀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢹⡄⠀⠀⣾⠁⠀⠀⠀⠀⠀⢸⡇
+-- ⢠⡴⠞⠋⠀⠀⠀⠀⠀⢀⡾⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠈⣧⠀⢸⡇⠀⠀⠀⠀⠀⠀⠘⡧
+-- ⠘⢧⣄⡀⠀⠀⠀⠀⠀⢻⡀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⢸⠇⠀⠀⠀⠀⠀⠀⢰⡇
+-- ⠀⠀⠈⣿⠀⠀⢀⣀⣀⣀⣱⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⢸⡀⠀⠀⠀⠀⠀⠀⢸⡇
+-- ⠀⠀⠀⢿⣤⠶⠋⠀⠈⠉⠁⠀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠀⠀⠀⠀⣿⠀⢸⡇⠀⠀⠀⠀⠀⠀⣸⠃
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠘⠳⠛⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠄
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠸⠃⠐⠀⠀⢠
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠶⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠁⠀⠀⠐⠀⠀⠂⠀⠀⠊
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠇⠂
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠂⠀⢀⢸⡄
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠊⢣
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⣰
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⡟⠋⠙⣧⠀⠀⣰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⣿
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⢠⡞⠛⠻⡧⠀⠀⢻⣄⡀⠈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠿⠀⠀⠀⠀⢰⡏
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠈⣷⠀⠀⠁⠀⠀⠘⠛⠳⢦⣀⠀⠀⠀⢀⡀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠃
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣄⡀⠀⣤⣤⣤⡄⠀⢹⡆⠀⠀⠀⣽⡷⣿⡋⠀⠀⠀⠀⠀⠀⠀⢠⡾⠁
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡁⠸⣇⡀⣀⡤⠀⢸⡇⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⢀⣠⡼⠋
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣄⠈⠛⠉⠀⣠⠞⠛⢳⡶⢤⣤⣤⣴⡶⠶⠶⠚⠛⢩⡿⢦⡄
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠛⢻⡁⠀⠀⠀⠙⠳⠶⠖⠛⠀⠀⠀⠀⣴⣋⣠⡾⠇
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⣰⣾⠁⠉⠁
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣌⠙⠳⢶⡶⠶⠶⠞⣫⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⡞⢻⠄
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠒⠛⠛⠶⠶⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠉⠉⠀⠈⠳⣤⡀
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⠂⠀⠀⠀⣤⠟⠁
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠷⠤⠶⢤⣀⡿
+-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈
+
 local path = vim.fn.stdpath('config') .. '/lua/core'
 
 -- Check if directory exists
 if vim.fn.isdirectory(path) ~= 1 then
-	print('Directory does not exist: ' .. path)
-	return
+  vim.notify('❌ Directory does not exist: ' .. path, vim.log.levels.ERROR)
+  return
 end
 
 -- Get all Lua files in the directory
@@ -12,13 +47,12 @@ local files = vim.fn.glob(path .. '/*.lua', false, true)
 
 -- Require each module
 for _, file_path in ipairs(files) do
-	local file = vim.fn.fnamemodify(file_path, ':t')  -- Get just the filename
-	if file:match('%.lua$') then
-		local mod = 'core.' .. file:gsub('%.lua$', '')
-		local success, err = pcall(require, mod)
-    
-		if not success then
-		print('Error loading module: ' .. mod .. ' (' .. err .. ')')
-		end
-	end
+  local filename = vim.fn.fnamemodify(file_path, ':t') -- extract file name
+  if filename:match('%.lua$') then
+    local module = 'core.' .. filename:gsub('%.lua$', '')
+    local ok, err = pcall(require, module)
+    if not ok then
+      vim.notify('⚠️ Failed to load ' .. module .. '\n' .. err, vim.log.levels.WARN)
+    end
+  end
 end

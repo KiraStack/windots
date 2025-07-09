@@ -11,10 +11,10 @@ if not (vim.uv or vim.loop).fs_stat(path) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-			{ out, 'WarningMsg' },
+			{ out,                            'WarningMsg' },
 			{ '\nPress any key to exit...' },
 		}, true, {})
-		
+
 		vim.fn.getchar()
 		os.exit(1)
 	end
@@ -25,20 +25,20 @@ vim.opt.rtp:prepend(path)
 
 require('lazy').setup({
 	spec = {
-		{ import = 'plugins' },  -- Main plugins specification
+		{ import = 'plugins' }, -- Main plugins specification
 	},
-  
+
 	defaults = {
-		lazy = false,    -- Load plugins immediately by default
+		lazy = false, -- Load plugins immediately by default
 		version = false, -- Always use latest version
 	},
-  
+
 	install = {
-		colorscheme = { 'tokyonight', 'habamax' },  -- Default colorschemes
+		colorscheme = { 'tokyonight', 'habamax' }, -- Default colorschemes
 	},
-  
+
 	checker = {
-		enabled = true,  -- Automatically check for updates
-		notify = false,  -- Disable update notifications
+		enabled = true, -- Automatically check for updates
+		notify = false, -- Disable update notifications
 	},
 })
