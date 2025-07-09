@@ -135,40 +135,40 @@ return {
     -- │                             spellwarn.nvim                               │
     -- ╰──────────────────────────────────────────────────────────────────────────╯
     {
-        'ravibrock/spellwarn.nvim',
-        event = 'VeryLazy',
-        opts = {
-            event = {
-                'CursorHold',
-                'InsertLeave',
-                'TextChanged',
-                'TextChangedI',
-                'TextChangedP',
-            },
-            enable = true,
-            ft_config = {
-                alpha = false,
-                help = false,
-                lazy = false,
-                lspinfo = false,
-                mason = false,
-            },
-            ft_default = true,
-            max_file_size = nil,
-            severity = {
-                spellbad = 'WARN',
-                spellcap = 'HINT',
-                spelllocal = 'HINT',
-                spellrare = 'INFO',
-            },
-            prefix = 'possible misspelling(s): ',
-            diagnostic_opts = { severity_sort = true },
-        },
-        config = function()
-            vim.opt.spell = true
-            vim.opt.spelllang = { 'en' }
-            require('spellwarn').setup(opts)
-        end,
+        -- 'ravibrock/spellwarn.nvim',
+        -- event = 'VeryLazy',
+        -- opts = {
+        --     event = {
+        --         'CursorHold',
+        --         'InsertLeave',
+        --         'TextChanged',
+        --         'TextChangedI',
+        --         'TextChangedP',
+        --     },
+        --     enable = true,
+        --     ft_config = {
+        --         alpha = false,
+        --         help = false,
+        --         lazy = false,
+        --         lspinfo = false,
+        --         mason = false,
+        --     },
+        --     ft_default = true,
+        --     max_file_size = nil,
+        --     severity = {
+        --         spellbad = 'WARN',
+        --         spellcap = 'HINT',
+        --         spelllocal = 'HINT',
+        --         spellrare = 'INFO',
+        --     },
+        --     prefix = 'possible misspelling(s): ',
+        --     diagnostic_opts = { severity_sort = true },
+        -- },
+        -- config = function()
+        --     vim.opt.spell = true
+        --     vim.opt.spelllang = { 'en' }
+        --     require('spellwarn').setup(opts)
+        -- end,
     },
 
     -- ╭──────────────────────────────────────────────────────────────────────────╮
@@ -516,7 +516,7 @@ return {
 
             -- The function to attach to the LSP client
             on_attach = function(client, bufnr)
-                require("nvim-navic").attach(client, bufnr) -- Attach nvim-navic
+                require('nvim-navic').attach(client, bufnr) -- Attach nvim-navic
 
                 -- Define diagnostic icons
                 local diagnostic_icons = {
