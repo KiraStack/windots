@@ -46,7 +46,7 @@ local host_os = get_os()
 -- }
 
 -- local override_theme = nil
--- local opacity = 0.95
+local opacity = 0.95
 -- local transparent_bg = string.format('rgba(22, 24, 26, %.2f)', opacity)
 
 -- local function resolve_scheme()
