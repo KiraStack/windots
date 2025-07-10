@@ -9,7 +9,7 @@ return {
 
   {
     'Exafunction/windsurf.nvim',
-    event = 'InsertEnter', -- Load when entering insert mode
+    event = 'InsertEnter',     -- Load when entering insert mode
     dependencies = { 'nvim-lua/plenary.nvim', 'hrsh7th/nvim-cmp' },
     config = function()
       require('codeium').setup()
@@ -25,13 +25,14 @@ return {
   -- ╰──────────────────────────────────────────────────────────────────────────╯
   {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter', -- Load when entering insert mode
+    event = 'InsertEnter',     -- Load when entering insert mode
     dependencies = {
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'saadparwaiz1/cmp_luasnip',
+      'echasnovski/mini.nvim'
     },
     config = function()
       -- Load required modules
@@ -43,31 +44,48 @@ return {
 
       -- Icons for nvim-cmp menu
       local symbols = {
-        Text = '',
-        Function = '󰆧',
-        Method = 'ƒ',
-        Constructor = '',
-        Field = '󰜢',
-        Variable = '󰀫',
-        Class = '󰠱',
-        Interface = '',
-        Module = '',
-        Property = '󰜢',
-        Unit = '',
-        Value = '',
-        Enum = '',
-        Keyword = '',
-        Snippet = '',
-        Color = '',
-        File = '',
-        Reference = '',
-        Folder = '',
-        EnumMember = '',
-        Constant = '',
-        Struct = '',
-        Event = '',
-        Operator = '',
-        TypeParameter = ''
+        Namespace = "󰌗",
+        Text = "󰉿",
+        Method = "󰆧",
+        Function = "󰆧",
+        Constructor = "",
+        Field = "󰜢",
+        Variable = "󰀫",
+        Class = "󰠱",
+        Interface = "",
+        Module = "",
+        Property = "󰜢",
+        Unit = "󰑭",
+        Value = "󰎠",
+        Enum = "",
+        Keyword = "󰌋",
+        Snippet = "",
+        Color = "󱓻",
+        File = "󰈚",
+        Reference = "󰈇",
+        Folder = "󰉋",
+        EnumMember = "",
+        Constant = "󰏿",
+        Struct = "󰙅",
+        Event = "",
+        Operator = "󰆕",
+        TypeParameter = "󰊄",
+        Table = "",
+        Object = "󰅩",
+        Tag = "",
+        Array = "[]",
+        Boolean = "",
+        Number = "",
+        Null = "󰟢",
+        Supermaven = "",
+        String = "󰉿",
+        Calendar = "",
+        Watch = "󰥔",
+        Package = "",
+        Copilot = "",
+        Codeium = "",
+        TabNine = "",
+        BladeNav = "",
       }
 
       -- Highlight groups for selection
@@ -132,16 +150,16 @@ return {
 
         -- Setup nvim-cmp sources
         sources = {
-          { name = 'nvim_lsp' }, -- Language server
-          { name = 'luasnip' },  -- Snippets
-          { name = 'buffer' },   -- Text within current buffer
-          { name = 'path' },     -- File-system paths
-          { name = "codeium" }   -- AI-powered code completion
+          { name = 'nvim_lsp' },           -- Language server
+          { name = 'luasnip' },            -- Snippets
+          { name = 'buffer' },             -- Text within current buffer
+          { name = 'path' },               -- File-system paths
+          { name = "codeium" }             -- AI-powered code completion
         },
       }
 
-      require('luasnip.loaders.from_vscode').lazy_load() -- Load snippets
-      cmp.setup(options)                                 -- Setup nvim-cmp_luasnip
+      require('luasnip.loaders.from_vscode').lazy_load()       -- Load snippets
+      cmp.setup(options)                                       -- Setup nvim-cmp_luasnip
     end,
   },
 
@@ -150,7 +168,7 @@ return {
   -- ╰──────────────────────────────────────────────────────────────────────────╯
   {
     'L3MON4D3/LuaSnip',
-    event = 'InsertEnter', -- Load when entering insert mode
+    event = 'InsertEnter',     -- Load when entering insert mode
     dependencies = { 'rafamadriz/friendly-snippets' },
     opts = {
       history = true,
