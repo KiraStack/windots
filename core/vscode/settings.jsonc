@@ -47,8 +47,8 @@
     // ╰──────────────────────────────────────────────────────────────╯
 
     // Layout
-    "workbench.sideBar.location": "right",
-    "workbench.panel.defaultLocation": "right",
+    "workbench.sideBar.location": "left",
+    "workbench.panel.defaultLocation": "bottom",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Cursor & Font Settings                  │
@@ -123,6 +123,8 @@
 
     // GitLens
     "gitlens.currentLine.enabled": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Code Runner Configuration               │
@@ -188,7 +190,5 @@
         "spwn": "spwn build",
         "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
         "gleam": "gleam run -m $fileNameWithoutExt"
-    },
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
+    }
 }
