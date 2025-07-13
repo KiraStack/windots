@@ -10,8 +10,8 @@
     "window.titleBarStyle": "custom",
 
     // Theme
-    "workbench.preferredLightColorTheme": "One Dark Pro",
-    "workbench.preferredDarkColorTheme": "One Dark Pro",
+    "workbench.preferredLightColorTheme": "Palenight Theme",
+    "workbench.preferredDarkColorTheme": "Palenight Theme",
     "workbench.iconTheme": "charmed-icons",
     "workbench.statusBar.visible": false,
 
