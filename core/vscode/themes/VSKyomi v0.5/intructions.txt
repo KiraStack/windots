@@ -1,0 +1,2 @@
+1. place the folder named "theme" here: C:\Users\[NAME]\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions
+2. change theme inside vs code using file>preferences>theme>color theme>kyomi

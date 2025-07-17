@@ -1,0 +1,25 @@
+{
+    "name": "theme-kyomi",
+    "displayName": "Kyomi",
+    "description": "A sleek, high-contrast dark theme designed for clarity and focus",
+    "version": "1.0.0",
+    "publisher": "vscode",
+    "license": "MIT",
+    "engines": {
+        "vscode": "*"
+    },
+    "contributes": {
+        "themes": [
+            {
+                "id": "Kyomi",
+                "label": "Kyomi",
+                "uiTheme": "vs-dark",
+                "path": "./themes/theme.json"
+            }
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    }
+}
