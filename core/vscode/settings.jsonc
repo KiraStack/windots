@@ -10,8 +10,8 @@
     "window.titleBarStyle": "custom",
 
     // Theme
-    "workbench.preferredLightColorTheme": "One Dark Pro",
-    "workbench.preferredDarkColorTheme": "One Dark Pro",
+    "workbench.preferredLightColorTheme": "Palenight Theme",
+    "workbench.preferredDarkColorTheme": "Palenight Theme",
     "workbench.iconTheme": "charmed-icons",
     "workbench.statusBar.visible": false,
 
@@ -47,8 +47,8 @@
     // ╰──────────────────────────────────────────────────────────────╯
 
     // Layout
-    "workbench.sideBar.location": "right",
-    "workbench.panel.defaultLocation": "right",
+    "workbench.sideBar.location": "left",
+    "workbench.panel.defaultLocation": "bottom",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Cursor & Font Settings                  │
@@ -123,6 +123,8 @@
 
     // GitLens
     "gitlens.currentLine.enabled": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Code Runner Configuration               │
@@ -189,6 +191,14 @@
         "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
         "gleam": "gleam run -m $fileNameWithoutExt"
     },
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      ROBLOX                                  │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Roblox LSP
+    "robloxLsp.hint.enable": true,
+    "robloxLsp.hint.paramName": true,
+    "robloxLsp.hint.returnType": true,
+    "robloxLsp.hint.setType": true
 }
