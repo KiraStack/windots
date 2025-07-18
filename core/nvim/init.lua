@@ -1,7 +1,5 @@
 -- ╭──────────────────────────────────────────────────────────────╮
--- │                          Dotfiles                            │
 -- │                        KiraStack/dots                        │
--- │                                                              │
 -- │       ~ Minimalist ~ Fast ~ Maintainable ~ Lua-powered ~     │
 -- ╰──────────────────────────────────────────────────────────────╯
 
@@ -34,25 +32,32 @@
 -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠷⠤⠶⢤⣀⡿
 -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈
 
-local path = vim.fn.stdpath('config') .. '/lua/core'
+-- Configure lazy.nvim installation path
+local path = vim.fn.stdpath("config") .. "/lua/core"
 
 -- Check if directory exists
 if vim.fn.isdirectory(path) ~= 1 then
-  vim.notify('❌ Directory does not exist: ' .. path, vim.log.levels.ERROR)
-  return
+	vim.notify("❌ Directory does not exist: " .. path, vim.log.levels.ERROR)
+	return
 end
 
 -- Get all Lua files in the directory
-local files = vim.fn.glob(path .. '/*.lua', false, true)
+local files = vim.fn.glob(path .. "/*.lua", false, true)
 
 -- Require each module
 for _, file_path in ipairs(files) do
-  local filename = vim.fn.fnamemodify(file_path, ':t') -- extract file name
-  if filename:match('%.lua$') then
-    local module = 'core.' .. filename:gsub('%.lua$', '')
-    local ok, err = pcall(require, module)
-    if not ok then
-      vim.notify('⚠️ Failed to load ' .. module .. '\n' .. err, vim.log.levels.WARN)
-    end
-  end
+	-- Extract file name
+	local filename = vim.fn.fnamemodify(file_path, ":t")
+
+	-- Check if file is a Lua file
+	if filename:match("%.lua$") then
+		-- Load module
+		local module = "core." .. filename:gsub("%.lua$", "")
+		local ok, err = pcall(require, module)
+
+		-- Check if module failed to load
+		if not ok then
+			vim.notify("⚠️ Failed to load " .. module .. "\n" .. err, vim.log.levels.WARN)
+		end
+	end
 end
