@@ -10,10 +10,8 @@
     "window.titleBarStyle": "custom",
 
     // Theme
-    "workbench.preferredLightColorTheme": "Catppuccin Frappé",
-    "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
-    "workbench.preferredHighContrastLightColorTheme": "Catppuccin Frappé",
-    "workbench.preferredHighContrastColorTheme": "Catppuccin Frappé",
+    "workbench.preferredLightColorTheme": "Palenight Theme",
+    "workbench.preferredDarkColorTheme": "Palenight Theme",
     "workbench.iconTheme": "charmed-icons",
     "workbench.statusBar.visible": false,
 
@@ -96,18 +94,16 @@
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
     },
-    // "[python]": {
-    //     "editor.defaultFormatter": "ms-python.black-formatter",
-    // },
-    // "[lua]": {
-    //     "editor.defaultFormatter": "sumneko.lua"
-    // },
-    "[luau]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
     },
-    // "[rust]": {
-    //     "editor.defaultFormatter": "rust-lang.rust-analyzer"
-    // },
+    "[lua]": {
+        "editor.defaultFormatter": "sumneko.lua"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
     // Interpreter Paths
     "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
 
@@ -204,12 +200,5 @@
     "robloxLsp.hint.enable": true,
     "robloxLsp.hint.paramName": true,
     "robloxLsp.hint.returnType": true,
-    "robloxLsp.hint.setType": true,
-
-    // Codeium
-    "codeium.enableConfig": {
-        "*": true,
-        "luau": true
-    },
-    "codeium.disableSupercomplete": false
+    "robloxLsp.hint.setType": true
 }

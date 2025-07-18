@@ -7,35 +7,38 @@ return {
 	-- │                               twilight.nvim                              │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"folke/twilight.nvim",
-		event = "BufReadPost",
+		'folke/twilight.nvim',
+		event = 'BufReadPost',
 		config = function()
-			vim.cmd("TwilightEnable")
+			vim.cmd('TwilightEnable')
 		end,
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
-	-- │                             catppuccin.nvim                              │
+	-- │                             cyberdream.nvim                              │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"catppuccin/nvim", -- Catppuccin theme plugin
-		name = "catppuccin",
+		'scottmckendry/cyberdream.nvim',
 		lazy = false,
 		priority = 1000,
 		opts = {
-			flavour = vim.opt.background:get() and "latte" or "frappe", -- Theme variant (latte, frappe, macchiato, mocha)
-			transparent_background = true, -- Enable transparent background
-			term_colors = false, -- Don't override terminal colors
-			integrations = { -- Enable integrations with popular plugins
-				treesitter = true,
-				cmp = true,
-				-- gitsigns = true,
-				-- telescope = true,
-			},
+			variant            = 'auto',
+			transparent        = true,
+			italic_comments    = true,
+			hide_fillchars     = true,
+			terminal_colors    = false,
+			cache              = true,
+			borderless_pickers = true,
+			overrides          = function(c)
+				return {
+					CursorLine   = { bg = c.bg },
+					CursorLineNr = { fg = c.magenta },
+				}
+			end,
 		},
 		config = function(_, opts)
-			require("catppuccin").setup(opts) -- Setup theme with options
-			vim.cmd.colorscheme("catppuccin") -- Apply Catppuccin colorscheme
+			require('cyberdream').setup(opts) -- Setup cyberdream
+			vim.cmd.colorscheme('cyberdream') -- Set colorscheme
 		end,
 	},
 
@@ -43,22 +46,19 @@ return {
 	-- │                               themery.nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"zaldih/themery.nvim",
-		cmd = "Themery",
+		'zaldih/themery.nvim',
+		cmd = 'Themery',
 		keys = {
-			{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
+			{ '<leader>ct', ':Themery<CR>', 'Toggle theme' },
 		},
 		opts = {
 			themes = {
-				{ name = "Catppuccin - Latte", colorscheme = "catppuccin-latte" },
-				{ name = "Catppuccin - Frappe", colorscheme = "catppuccin-frappe" },
-				{ name = "Catppuccin - Macchiato", colorscheme = "catppuccin-macchiato" },
-				{ name = "Catppuccin - Mocha", colorscheme = "catppuccin-mocha" },
+				{ name = 'Cyberdream', colorscheme = 'cyberdream' },
 			},
 			livePreview = true,
 		},
 		config = function(_, opts)
-			require("themery").setup(opts)
+			require('themery').setup(opts)
 		end,
 	},
 
@@ -70,69 +70,69 @@ return {
 	-- │                             dashboard-nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-		dependencies = { "folke/snacks.nvim" },
+		'nvimdev/dashboard-nvim',
+		event = 'VimEnter',
+		dependencies = { 'folke/snacks.nvim' },
 		opts = {
-			theme = "hyper",
+			theme = 'hyper',
 			config = {
 				week_header = { enable = true },
 				project = { enable = false },
 				mru = { enable = false },
 				footer = {},
-			},
+			}
 		},
 		config = function(_, opts)
-			local dashboard = require("dashboard")
-			local snacks = require("snacks")
+			local dashboard = require('dashboard')
+			local snacks = require('snacks')
 
-			vim.cmd("highlight DashboardHeader guifg=#ffffff")
+			vim.cmd('highlight DashboardHeader guifg=#ffffff')
 
 			local shortcuts = {
 				{
-					icon = "󰒲  ",
-					icon_hl = "Boolean",
-					desc = "Update ",
-					group = "Directory",
-					action = "Lazy update",
-					key = "u",
+					icon = '󰒲  ',
+					icon_hl = 'Boolean',
+					desc = 'Update ',
+					group = 'Directory',
+					action = 'Lazy update',
+					key = 'u',
 				},
 				{
-					icon = "   ",
-					icon_hl = "Boolean",
-					desc = "Files ",
-					group = "Statement",
+					icon = '   ',
+					icon_hl = 'Boolean',
+					desc = 'Files ',
+					group = 'Statement',
 					action = snacks.picker.files,
-					key = "f",
+					key = 'f',
 				},
 				{
-					icon = "   ",
-					icon_hl = "Boolean",
-					desc = "Recent ",
-					group = "String",
+					icon = '   ',
+					icon_hl = 'Boolean',
+					desc = 'Recent ',
+					group = 'String',
 					action = snacks.picker.recent,
-					key = "r",
+					key = 'r',
 				},
 				{
-					icon = "   ",
-					icon_hl = "Boolean",
-					desc = "Grep ",
-					group = "ErrorMsg",
+					icon = '   ',
+					icon_hl = 'Boolean',
+					desc = 'Grep ',
+					group = 'ErrorMsg',
 					action = snacks.picker.grep,
-					key = "g",
+					key = 'g',
 				},
 				{
-					icon = "   ",
-					icon_hl = "Boolean",
-					desc = "Quit ",
-					group = "WarningMsg",
-					action = "qall!",
-					key = "q",
+					icon = '   ',
+					icon_hl = 'Boolean',
+					desc = 'Quit ',
+					group = 'WarningMsg',
+					action = 'qall!',
+					key = 'q',
 				},
 			}
 
 			opts.config.shortcut = shortcuts
 			dashboard.setup(opts)
 		end,
-	},
+	}
 }
