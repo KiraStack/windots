@@ -18,49 +18,41 @@ return {
 	-- │                             catppuccin.nvim                              │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"catppuccin/nvim", -- Catppuccin theme plugin
-		name = "catppuccin",
+		"scottmckendry/cyberdream.nvim",
+		name = "cyberdream",
 		lazy = false,
 		priority = 1000,
 		opts = {
-			flavour = vim.opt.background:get() and "latte" or "frappe", -- Theme variant (latte, frappe, macchiato, mocha)
-			transparent_background = true, -- Enable transparent background
-			term_colors = false, -- Don't override terminal colors
-			integrations = { -- Enable integrations with popular plugins
-				treesitter = true,
-				cmp = true,
-				-- gitsigns = true,
-				-- telescope = true,
-			},
+			variant = "auto", -- Enable auto detection
+			transparent = true, -- Enable transparency
+			italic_comments = true, -- Enable italic comments
+			hide_fillchars = true, -- Hide fill characters
+			borderless_pickers = true, -- Hide picker borders
+			cache = true, -- Cache colorscheme colors
 		},
 		config = function(_, opts)
-			require("catppuccin").setup(opts) -- Setup theme with options
-			vim.cmd.colorscheme("catppuccin") -- Apply Catppuccin colorscheme
+			require("cyberdream").setup(opts) -- Setup theme with options
+			vim.cmd.colorscheme("cyberdream") -- Apply Cyberdream colorscheme
 		end,
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                               themery.nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
-	{
-		"zaldih/themery.nvim",
-		cmd = "Themery",
-		keys = {
-			{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
-		},
-		opts = {
-			themes = {
-				{ name = "Catppuccin - Latte", colorscheme = "catppuccin-latte" },
-				{ name = "Catppuccin - Frappe", colorscheme = "catppuccin-frappe" },
-				{ name = "Catppuccin - Macchiato", colorscheme = "catppuccin-macchiato" },
-				{ name = "Catppuccin - Mocha", colorscheme = "catppuccin-mocha" },
-			},
-			livePreview = true,
-		},
-		config = function(_, opts)
-			require("themery").setup(opts)
-		end,
-	},
+	-- {
+	-- 	"zaldih/themery.nvim",
+	-- 	cmd = "Themery",
+	-- 	keys = {
+	-- 		{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
+	-- 	},
+	-- 	opts = {
+	-- 		themes = {},
+	-- 		livePreview = true,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("themery").setup(opts)
+	-- 	end,
+	-- },
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                              Dashboard & UI                              │
