@@ -4,12 +4,13 @@
     // ╰──────────────────────────────────────────────────────────────╯
 
     // Window
-    "window.autoDetectColorScheme": true,
+    // "window.autoDetectColorScheme": true,
     "window.title": "${appName}",
-    "window.menuBarVisibility": "toggle", // hide menu unless Alt pressed
+    "window.menuBarVisibility": "toggle", // Hide menu unless `alt` pressed
     "window.titleBarStyle": "custom",
 
     // Theme
+    "workbench.colorTheme": "Catppuccin Latte",
     "workbench.preferredLightColorTheme": "Catppuccin Latte",
     "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
     "workbench.preferredHighContrastLightColorTheme": "Catppuccin Latte",
@@ -60,12 +61,12 @@
     "editor.cursorBlinking": "expand",
     "editor.cursorStyle": "line",
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.fontFamily": "Fira Code, JetBrains Mono, monospace",
+    "editor.fontFamily": "JetBrainsMono NF, Fira Code, monospace",
     "editor.fontLigatures": true,
 
     // Terminal
     "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.fontFamily": "Fira Code, JetBrains Mono, monospace",
+    "terminal.integrated.fontFamily": "JetBrainsMono NF, Fira Code, monospace",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Formatting & Suggestions                │
