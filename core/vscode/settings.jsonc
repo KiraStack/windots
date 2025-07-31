@@ -4,17 +4,16 @@
     // ╰──────────────────────────────────────────────────────────────╯
 
     // Window
-    // "window.autoDetectColorScheme": true,
+    "window.autoDetectColorScheme": true,
     "window.title": "${appName}",
     "window.menuBarVisibility": "toggle", // Hide menu unless `alt` pressed
     "window.titleBarStyle": "custom",
 
     // Theme
-    "workbench.colorTheme": "Catppuccin Latte",
-    "workbench.preferredLightColorTheme": "Catppuccin Latte",
-    "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
-    "workbench.preferredHighContrastLightColorTheme": "Catppuccin Latte",
-    "workbench.preferredHighContrastColorTheme": "Catppuccin Frappé",
+    "workbench.preferredLightColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredDarkColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredHighContrastLightColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredHighContrastColorTheme": "Palenight (Mild Contrast)",
     "workbench.iconTheme": "charmed-icons",
     "workbench.statusBar.visible": false,
 
@@ -94,23 +93,23 @@
     // ╰──────────────────────────────────────────────────────────────╯
 
     // Formatters
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
-    },
+    // "[cpp]": {
+    //    "editor.defaultFormatter": "ms-vscode.cpptools"
+    // },
     // "[python]": {
     //     "editor.defaultFormatter": "ms-python.black-formatter",
     // },
     // "[lua]": {
     //     "editor.defaultFormatter": "sumneko.lua"
     // },
-    "[luau]": {
-        "editor.defaultFormatter": "JohnnyMorganz.stylua"
-    },
+    // "[luau]": {
+    //    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    // },
     // "[rust]": {
     //     "editor.defaultFormatter": "rust-lang.rust-analyzer"
     // },
     // Interpreter Paths
-    "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
+    // "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      File & Git Management                   │
@@ -126,10 +125,10 @@
     "git.inputValidationSubjectLength": 50,
     "git.decorations.enabled": true,
 
-    // GitLens
-    "gitlens.currentLine.enabled": true,
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4o-mini",
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      TODO Highlight                          │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "todohighlight.isEnable": true,
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      Code Runner Configuration               │
@@ -198,16 +197,6 @@
     },
 
     // ╭──────────────────────────────────────────────────────────────╮
-    // │                      ROBLOX                                  │
-    // ╰──────────────────────────────────────────────────────────────╯
-
-    // Roblox LSP
-    "robloxLsp.hint.enable": true,
-    "robloxLsp.hint.paramName": true,
-    "robloxLsp.hint.returnType": true,
-    "robloxLsp.hint.setType": true,
-
-    // ╭──────────────────────────────────────────────────────────────╮
     // │                      Codeium                                 │
     // ╰──────────────────────────────────────────────────────────────╯
 
@@ -216,5 +205,15 @@
         "*": true,
         "luau": true
     },
-    "codeium.disableSupercomplete": false
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      CodeSnap                                │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "cSpell.enabled": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      CodeSnap                                │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "codesnap.transparentBackground": true,
+    "codesnap.showLineNumbers": false
 }
