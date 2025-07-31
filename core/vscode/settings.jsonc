@@ -210,6 +210,12 @@
     // │                      CodeSnap                                │
     // ╰──────────────────────────────────────────────────────────────╯
     "cSpell.enabled": true,
+    "cSpell.enabledFileTypes": {
+        "*": true,
+        "markdown": true,
+        "json": false,
+        "jsonc": false
+    },
 
     // ╭──────────────────────────────────────────────────────────────╮
     // │                      CodeSnap                                │
