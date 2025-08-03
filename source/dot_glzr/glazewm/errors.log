@@ -1,0 +1,4 @@
+[2m2025-08-03T00:14:02.005945Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Program path is not valid for command 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Yasb.lnk'.
+[2m2025-08-03T00:19:37.828250Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Program path is not valid for command 'C:\Users\ashis\Desktop\Discord.lnk'.
+[2m2025-08-03T00:24:23.058378Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m keybindings[52].commands: unrecognized subcommand
+ at line 294 column 17

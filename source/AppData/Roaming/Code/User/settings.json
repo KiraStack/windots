@@ -1,0 +1,228 @@
+{
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Window & Theme Setup                    │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Window
+    "window.autoDetectColorScheme": true,
+    "window.title": "${appName}",
+    "window.menuBarVisibility": "toggle", // Hide menu unless `alt` pressed
+    "window.titleBarStyle": "custom",
+
+    // Theme
+    "workbench.preferredLightColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredDarkColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredHighContrastLightColorTheme": "Palenight (Mild Contrast)",
+    "workbench.preferredHighContrastColorTheme": "Palenight (Mild Contrast)",
+    "workbench.iconTheme": "charmed-icons",
+    "workbench.statusBar.visible": false,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Editor UI & Behavior                    │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Editor
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.showTabs": "multiple",
+    "workbench.editor.labelFormat": "short",
+    "workbench.editor.highlightModifiedTabs": false,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.wrapTabs": false,
+    "workbench.editor.showIcons": false,
+    "editor.lineNumbers": "relative",
+    "workbench.editor.empty.hint": "hidden",
+    "editor.guides.indentation": false,
+
+    // UI
+    "breadcrumbs.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.glyphMargin": true,
+    "editor.renderLineHighlight": "none",
+    "workbench.activityBar.location": "top",
+
+    // Explorer
+    "explorer.compactFolders": true,
+    "explorer.autoReveal": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Layout & Panels                         │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Layout
+    "workbench.sideBar.location": "left",
+    "workbench.panel.defaultLocation": "bottom",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Cursor & Font Settings                  │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Cursor
+    "editor.cursorBlinking": "expand",
+    "editor.cursorStyle": "line",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.fontFamily": "JetBrainsMono NF, Fira Code, monospace",
+    "editor.fontLigatures": true,
+
+    // Terminal
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.fontFamily": "JetBrainsMono NF, Fira Code, monospace",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Formatting & Suggestions                │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Formatting
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.showWords": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+
+    // Prettier
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.arrowParens": "always",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Language Specific Settings              │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Formatters
+    // "[cpp]": {
+    //    "editor.defaultFormatter": "ms-vscode.cpptools"
+    // },
+    // "[python]": {
+    //     "editor.defaultFormatter": "ms-python.black-formatter",
+    // },
+    // "[lua]": {
+    //     "editor.defaultFormatter": "sumneko.lua"
+    // },
+    // "[luau]": {
+    //    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    // },
+    // "[rust]": {
+    //     "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    // },
+    // Interpreter Paths
+    // "python.defaultInterpreterPath": "C:\\Users\\Dennis\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      File & Git Management                   │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Files
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    // Git
+    "git.autofetch": true,
+    "git.inputValidationSubjectLength": 50,
+    "git.decorations.enabled": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      TODO Highlight                          │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "todohighlight.isEnable": true,
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Code Runner Configuration               │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Code Runner
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "zig": "zig run",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "tsx",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runghc",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "sml": "cd $dir && sml $fileName",
+        "mojo": "mojo run",
+        "erlang": "escript",
+        "spwn": "spwn build",
+        "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+        "gleam": "gleam run -m $fileNameWithoutExt"
+    },
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      Codeium                                 │
+    // ╰──────────────────────────────────────────────────────────────╯
+
+    // Codeium
+    "codeium.enableConfig": {
+        "*": true,
+        "luau": true
+    },
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      CodeSnap                                │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "cSpell.enabled": true,
+    "cSpell.enabledFileTypes": {
+        "*": true,
+        "markdown": true,
+        "json": false,
+        "jsonc": false
+    },
+
+    // ╭──────────────────────────────────────────────────────────────╮
+    // │                      CodeSnap                                │
+    // ╰──────────────────────────────────────────────────────────────╯
+    "codesnap.transparentBackground": true,
+    "codesnap.showLineNumbers": false,
+    "[luau]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    }
+}
