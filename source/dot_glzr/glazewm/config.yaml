@@ -1,7 +1,10 @@
 general:
     # Commands to run when the WM has started (e.g. to run a script or launch
     # another application). Here we are running a batch script to start Zebar.
-    startup_commands: [ "shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk"]
+    startup_commands:
+        [
+            "shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk",
+        ]
 
     # Whether to automatically focus windows underneath the cursor.
     focus_follows_cursor: false
@@ -288,5 +291,8 @@ keybindings:
       bindings: ['alt+s']
 
     # Restart 'yet another status bar' (yasb)
-    - commands: ['shell-exec powershell -Command "Stop-Process -Name yasb; Start-Process yasb"']
+    - commands:
+          [
+              'shell-exec powershell -Command "Stop-Process -Name yasb; Start-Process yasb"',
+          ]
       bindings: ['alt+shift+b']
