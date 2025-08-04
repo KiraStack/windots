@@ -275,24 +275,21 @@ keybindings:
       bindings: ['alt+p']
 
     # Open file explorer
-    - commands: ['shell-exec explorer']
-      bindings: ['alt+e']
+    # - commands: ['shell-exec explorer']
+    #   bindings: ['alt+e']
 
     # Open browser
     - commands: ['shell-exec zen']
       bindings: ['alt+b']
 
     # Open Neovim
-    - commands: ['shell-exec nvim']
-      bindings: ['alt+n']
+    # - commands: ['shell-exec nvim']
+    #   bindings: ['alt+n']
 
     # Open btop
-    - commands: ['shell-exec btop']
-      bindings: ['alt+s']
+    # - commands: ['shell-exec btop']
+    #   bindings: ['alt+s']
 
     # Restart 'yet another status bar' (yasb)
-    - commands:
-          [
-              'shell-exec powershell -Command "Stop-Process -Name yasb; Start-Process yasb"',
-          ]
-      bindings: ['alt+shift+b']
+    # - commands: ['shell-exec powershell -Command "Stop-Process -Name yasb; Start-Process yasb"']
+    #   bindings: ['alt+shift+b']
