@@ -9,8 +9,18 @@ return {
 	{
 		"folke/twilight.nvim",
 		event = "BufReadPost",
-		config = function()
-			vim.cmd("TwilightEnable")
+		opts = {
+			dimming = {
+				alpha = 0.25, -- Amount of dimming
+				color = { "Normal", "#ffffff" },
+				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
+				inactive = true, -- When true, other windows will be fully dimmed (unless they contain the same buffer)
+			},
+			context = 20, -- Amount of context lines to show
+		},
+		config = function(_, opts)
+			require("twilight").setup(opts) -- Setup plugin with options
+			vim.cmd("TwilightEnable") -- Enable twilight
 		end,
 	},
 
