@@ -7,9 +7,8 @@ return {
 	-- │                                cord.nvim                                 │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		'vyfor/cord.nvim',
-		event = 'VeryLazy',
-		build = ':Cord update'
-	}
-
+		"vyfor/cord.nvim",
+		event = "VeryLazy",
+		build = ":Cord update",
+	},
 }
