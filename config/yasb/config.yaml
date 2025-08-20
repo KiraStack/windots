@@ -73,14 +73,14 @@ widgets:
     komorebi_workspaces:
         type: 'komorebi.workspaces.WorkspaceWidget'
         options:
-            label_offline: "\u26a1 Offline"
+            label_offline: "\u26a1 N/A"
             label_workspace_btn: "\udb81\udc3d"
             label_workspace_active_btn: ''
             label_workspace_populated_btn: "\udb81\udc3e"
             label_default_name: '{index}'
             label_zero_index: false
-            hide_empty_workspaces: false
-            hide_if_offline: false
+            hide_empty_workspaces: true
+            hide_if_offline: true
             animation: true
     active_window:
         type: 'yasb.active_window.ActiveWindowWidget'
