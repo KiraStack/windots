@@ -10,13 +10,13 @@
     "default_workspace_padding": 0,
     "default_container_padding": 0,
     "border": true,
-    "border_width": 4,
+    "border_width": 3,
     "border_offset": -1,
-    "theme": {
-        "palette": "Base16",
-        "name": "HorizonDark",
-        "unfocused_border": "Base03",
-        "bar_accent": "Base0D"
+    "border_colours": {
+        "single": "#000000",
+        "stack": "#00a542",
+        "monocle": "#ff3399",
+        "unfocused": "#808080"
     },
     "stackbar": {
         "height": 40,
