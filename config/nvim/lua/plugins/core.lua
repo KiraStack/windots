@@ -1032,28 +1032,7 @@ return {
 		"lopi-py/luau-lsp.nvim",
 		event = "VeryLazy",
 		dependencies = {},
-		opts = {
-			platform = {
-				type = "standard",
-			},
-			types = {
-				roblox_security_level = "PluginSecurity",
-			},
-			sourcemap = {
-				enabled = true,
-				autogenerate = true, -- automatic generation when the server is initialized
-				rojo_project_file = "default.project.json",
-				sourcemap_file = "sourcemap.json",
-			},
-			fflags = {
-				enable_new_solver = true, -- enables the fflags required for luau's new type solver
-				sync = true, -- sync currently enabled fflags with roblox's published fflags
-				override = { -- override fflags passed to luau
-					LuauTableTypeMaximumStringifierLength = "100",
-				},
-			},
-		},
-		config = function(_, opts)
+		config = function()
 			-- Function to find the Rojo project file
 			local function rojo_project()
 				-- Match the Rojo project file pattern
@@ -1062,23 +1041,38 @@ return {
 				end)
 			end
 
-			-- Check for Rojo project
-			if rojo_project() then
-				-- Set type to roblox for Rojo projects
-				opts.type = "roblox"
-
-				-- Add filetype for Rojo projects
-				vim.filetype.add({
-					extension = {
-						-- Match files depending on their location
-						lua = function(path)
-							return path:match("%.nvim%.lua$") and "lua" or "luau"
-						end,
+			-- Setup plugin with options
+			require("luau-lsp").setup({
+				platform = {
+					type = rojo_project() and "roblox" or "standard",
+				},
+				types = {
+					roblox_security_level = "PluginSecurity",
+				},
+				sourcemap = {
+					enabled = true,
+					autogenerate = true, -- automatic generation when the server is initialized
+					rojo_project_file = "default.project.json",
+					sourcemap_file = "sourcemap.json",
+				},
+				fflags = {
+					enable_new_solver = true, -- enables the fflags required for luau's new type solver
+					sync = true, -- sync currently enabled fflags with roblox's published fflags
+					override = { -- override fflags passed to luau
+						LuauTableTypeMaximumStringifierLength = "100",
 					},
-				})
-			end
+				},
+			})
 
-			require("luau-lsp").setup(opts) -- Setup plugin with options
+			-- Add filetype for Rojo projects
+			vim.filetype.add({
+				extension = {
+					-- Match files depending on their location
+					lua = function(path)
+						return path:match("%.nvim%.lua$") and "lua" or "luau"
+					end,
+				},
+			})
 		end,
 	},
 

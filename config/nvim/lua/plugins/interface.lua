@@ -49,20 +49,25 @@ return {
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                               themery.nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
-	-- {
-	-- 	"zaldih/themery.nvim",
-	-- 	cmd = "Themery",
-	-- 	keys = {
-	-- 		{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
-	-- 	},
-	-- 	opts = {
-	-- 		themes = {},
-	-- 		livePreview = true,
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("themery").setup(opts)
-	-- 	end,
-	-- },
+	{
+		"zaldih/themery.nvim",
+		cmd = "Themery",
+		keys = {
+			{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
+		},
+		opts = {
+			themes = {
+				{
+					name = "cyberdream",
+					colorscheme = "cyberdream",
+				},
+			},
+			livePreview = true,
+		},
+		config = function(_, opts)
+			require("themery").setup(opts)
+		end,
+	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                              Dashboard & UI                              │
