@@ -1026,13 +1026,39 @@ return {
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
-	-- │                               mason.nvim                                 │
+	-- │                               luau-lsp.nvim                              │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
 		"lopi-py/luau-lsp.nvim",
 		event = "VeryLazy",
-		dependencies = {},
-		config = function()
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			platform = {
+				type = "standard",
+			},
+			types = {
+				roblox_security_level = "PluginSecurity",
+			},
+			sourcemap = {
+				enabled = true,
+				autogenerate = true, -- automatic generation when the server is initialized
+				rojo_project_file = "default.project.json",
+				sourcemap_file = "sourcemap.json",
+			},
+			plugin = {
+				enabled = true,
+				port = 3667,
+			},
+			fflags = {
+				enable_new_solver = true, -- enables the fflags required for luau's new type solver
+				sync = true, -- sync currently enabled fflags with roblox's published fflags
+				override = { -- override fflags passed to luau
+					LuauTableTypeMaximumStringifierLength = "100",
+				},
+			},
+		},
+
+		config = function(_, opts)
 			-- Function to find the Rojo project file
 			local function rojo_project()
 				-- Match the Rojo project file pattern
@@ -1041,28 +1067,14 @@ return {
 				end)
 			end
 
+			-- Check if it's a Rojo project
+			if rojo_project() then
+				-- Set platform type
+				opts.platform.type = rojo_project() and "roblox" or "standard"
+			end
+
 			-- Setup plugin with options
-			require("luau-lsp").setup({
-				platform = {
-					type = rojo_project() and "roblox" or "standard",
-				},
-				types = {
-					roblox_security_level = "PluginSecurity",
-				},
-				sourcemap = {
-					enabled = true,
-					autogenerate = true, -- automatic generation when the server is initialized
-					rojo_project_file = "default.project.json",
-					sourcemap_file = "sourcemap.json",
-				},
-				fflags = {
-					enable_new_solver = true, -- enables the fflags required for luau's new type solver
-					sync = true, -- sync currently enabled fflags with roblox's published fflags
-					override = { -- override fflags passed to luau
-						LuauTableTypeMaximumStringifierLength = "100",
-					},
-				},
-			})
+			require("luau-lsp").setup(opts)
 
 			-- Add filetype for Rojo projects
 			vim.filetype.add({
