@@ -10,7 +10,7 @@
 -- ╰──────────────────────────────────────────────────────────────╯
 
 vim.opt.number = true -- Show line numbers
-vim.opt.relativenumber = true -- Show relative line numbers
+-- vim.opt.relativenumber = true -- Show relative line numbers: commented out for now
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
 vim.opt.termguicolors = true -- Enable true color support
 vim.opt.signcolumn = "yes" -- Always show sign column

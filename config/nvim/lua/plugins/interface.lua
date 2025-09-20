@@ -205,7 +205,7 @@ return {
 			})
 
 			-- Persist focus
-			require("cokeline.history"):last():focus()
+			-- require("cokeline.history"):last():focus() -- Commented out for now
 		end,
 	},
 
