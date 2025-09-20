@@ -1144,4 +1144,38 @@ return {
 			require("renamer").setup()
 		end,
 	},
+
+	-- ╭──────────────────────────────────────────────────────────────────────────╮
+	-- │                              resession.nvim                              │
+	-- ╰──────────────────────────────────────────────────────────────────────────╯
+	{
+		"stevearc/resession.nvim",
+		event = "VeryLazy",
+		opts = {
+			autosave = {
+				enabled = true, -- Enable periodic save
+				interval = 60, -- Save every 60 seconds
+				notify = true, -- Show notification
+			},
+		},
+		config = function(_, opts)
+			-- Load plugin
+			local resession = require("resession")
+
+			-- Setup with options
+			resession.setup(opts)
+
+			-- Keymaps
+			vim.keymap.set("n", "<leader>ss", resession.save) -- Save session
+			vim.keymap.set("n", "<leader>sl", resession.load) -- Load session
+			vim.keymap.set("n", "<leader>sd", resession.delete) -- Delete session
+
+			-- Automatically save a "last" session on exit
+			vim.api.nvim_create_autocmd("VimLeavePre", {
+				callback = function()
+					resession.save("last")
+				end,
+			})
+		end,
+	},
 }

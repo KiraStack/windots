@@ -203,6 +203,9 @@ return {
 					},
 				},
 			})
+
+			-- Persist focus
+			require("cokeline.history"):last():focus()
 		end,
 	},
 
