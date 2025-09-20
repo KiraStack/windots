@@ -4,53 +4,106 @@ return {
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
-	-- │                                flash.nvim                                │
+	-- │                         	floating-term.nvim                            │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		"folke/flash.nvim",
+		"numToStr/FTerm.nvim",
+		opts = {
+			border = "double",
+			dimensions = {
+				height = 0.8,
+				width = 0.8,
+			},
+			cmd = "powershell.exe",
+		},
 		event = "VeryLazy",
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				"S",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-			{
-				"r",
-				mode = "o",
-				function()
-					require("flash").remote()
-				end,
-				desc = "Remote Flash",
-			},
-			{
-				"R",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
-				end,
-				desc = "Treesitter Search",
-			},
-			{
-				"<c-s>",
-				mode = { "c" },
-				function()
-					require("flash").toggle()
-				end,
-				desc = "Toggle Flash Search",
+		config = function(_, opts)
+			-- Load required module
+			local term = require("FTerm")
+
+			-- Setup plugin with options
+			term.setup(opts)
+
+			-- Toggle terminal
+			vim.keymap.set("n", "<A-i>", function()
+				term.toggle()
+			end)
+
+			-- Exit terminal and toggle
+			vim.keymap.set("t", "<A-i>", function()
+				-- Exit terminal mode
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+
+				-- Toggle terminal
+				term.toggle()
+			end)
+		end,
+	},
+
+	-- ╭──────────────────────────────────────────────────────────────────────────╮
+	-- │                                harpoon.nvim                              │
+	-- ╰──────────────────────────────────────────────────────────────────────────╯
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			settings = {
+				save_on_toggle = true,
+				save_on_change = true,
+				enter_on_sendcmd = false,
+				tmux_autoclose_windows = false,
 			},
 		},
+		config = function(_, opts)
+			-- Load required module
+			local harpoon = require("harpoon")
+
+			-- Setup plugin with options
+			harpoon:setup(opts)
+
+			--// [ Keymaps: ]
+
+			-- Add file to Harpoon
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():add()
+			end)
+
+			-- Toggle quick menu
+			vim.keymap.set("n", "<leader>h", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end)
+
+			-- Switch to first harpoon file
+			vim.keymap.set("n", "<C-h>", function()
+				harpoon:list():select(1)
+			end)
+
+			-- Switch to second harpoon file
+			vim.keymap.set("n", "<C-j>", function()
+				harpoon:list():select(2)
+			end)
+
+			-- Switch to third harpoon file
+			vim.keymap.set("n", "<C-k>", function()
+				harpoon:list():select(3)
+			end)
+
+			-- Switch to fourth harpoon file
+			vim.keymap.set("n", "<C-l>", function()
+				harpoon:list():select(4)
+			end)
+
+			-- Switch to previous harpoon file
+			vim.keymap.set("n", "<C-S-P>", function()
+				harpoon:list():prev()
+			end)
+
+			-- Switch to next harpoon file
+			vim.keymap.set("n", "<C-S-N>", function()
+				harpoon:list():next()
+			end)
+		end,
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
@@ -77,19 +130,6 @@ return {
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
 		end,
-	},
-
-	-- ╭──────────────────────────────────────────────────────────────────────────╮
-	-- │                            smear-cursor.nvim                             │
-	-- ╰──────────────────────────────────────────────────────────────────────────╯
-	{
-		"sphamba/smear-cursor.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			min_horizontal_distance_smear = 2,
-			min_vertical_distance_smear = 2,
-			legacy_computing_symbols_support = true,
-		},
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
