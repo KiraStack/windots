@@ -292,7 +292,14 @@ return {
 			},
 		},
 		config = function(_, opts)
+			-- Setup conform with options
 			require("conform").setup(opts)
+
+			-- Bind castom keymap
+			vim.keymap.set("n", "<leader>cf", function()
+				-- Use LSP if available
+				require("conform").format({ lsp_format = "fallback" })
+			end, { desc = "Format buffer with Conform" })
 		end,
 	},
 
