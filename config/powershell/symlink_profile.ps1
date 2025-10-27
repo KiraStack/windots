@@ -1,1 +1,0 @@
-C:/Program Files/PowerShell/7/profile.ps1
