@@ -1,0 +1,119 @@
+// Zed Settings
+// For detailed configuration options, visit: https://zed.dev/docs/configuring-zed
+// To view unmodified default settings, run:
+// `zed: open default settings` (cmd-shift-p / ctrl-shift-p).
+
+{
+  // UI Settings
+  "ui_font_size": 16, // UI font size
+  "ui_font_family": "Roboto Mono", // Font for UI elements
+  "theme": "Tokyo Night Storm", // Overall theme
+  "icon_theme": "Base Charmed Icons", // Icon set
+  "relative_line_numbers": false, // Show relative line numbers
+  "current_line_highlight": "all", // Highlight current line
+  "soft_wrap": "editor_width", // Wrap long lines to editor width
+
+  // Editor / Buffer
+  "buffer_font_size": 16, // Font size in code buffers
+  "buffer_font_family": "JetBrainsMono NF", // Font for the code editor
+  "buffer_font_features": {
+    "calt": false // Contextual alternates in fonts
+  },
+  "format_on_save": "on", // Automatically format files on save
+  "tab_size": 4, // Tab width in spaces
+  "show_edit_predictions": true, // Disable edit predictions
+  "edit_predictions": {
+    "disabled_globs": [".env"] // Disable predictions for specific files
+  },
+  "vim_mode": false, // Disable Vim-style keybindings
+
+  // Languages / Formatters
+  "languages": {
+    // "Python": {
+    //     "format_on_save": "on", // Enable auto-formatting for Python
+    //     "language_servers": ["pyright", "ruff"], // Python language servers
+    //     "formatter": [
+    //         {
+    //             "code_actions": {
+    //                 "source.fixAll.ruff": true, // Fix all auto-fixable issues
+    //                 "source.organizeImports.ruff": true // Organize imports
+    //             }
+    //         }
+    //     ]
+    // },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier", // Use Prettier for formatting
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true // Auto-fix ESLint issues
+      }
+    },
+    "YAML": {
+      "show_edit_predictions": false
+    }
+  },
+  "formatter": "prettier", // Default formatter
+  "prettier": {
+    "semi": false, // No semicolons
+    "tabWidth": 2, // Prettier tab width
+    "bracketSpacing": true, // Spaces inside object literals
+    "singleQuote": true, // Use single quotes
+    "jsxSingleQuote": true, // JSX single quotes
+    "allowed": true
+  },
+
+  // Telemetry
+  "telemetry": {
+    "diagnostics": false, // Disable diagnostic data submission
+    "metrics": false // Disable usage metrics
+  },
+
+  // Autosave / Confirmation
+  "autosave": "on_window_change", // Save when switching windows
+  "confirm_quit": true, // Ask before quitting
+
+  // Toolbar / Panels
+  "toolbar": {
+    "breadcrumbs": true, // Show breadcrumbs
+    "quick_actions": false, // Hide quick action buttons
+    "selections_menu": false // Hide selections menu
+  },
+  "tabs": {
+    "git_status": true // Show Git status in tabs
+  },
+  "outline_panel": {
+    "button": false // Hide outline panel button
+  },
+  "notification_panel": {
+    "button": false // Hide notification panel button
+  },
+  "collaboration_panel": {
+    "button": false // Hide collaboration panel button
+  },
+
+  // Terminal
+  "terminal": {
+    "copy_on_select": true, // Automatically copy selected text
+    "blinking": "on", // Cursor blinking
+    "font_family": "Roboto Mono", // Terminal font
+    "cursor_shape": "bar", // Cursor style
+    "shell": {
+      "program": "fish" // Default shell
+    }
+  },
+
+  // Agent / AI
+  "agent": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-pro"
+    }
+  },
+  "features": {
+    "edit_prediction_provider": "zed" // Edit prediction backend
+  }
+}
