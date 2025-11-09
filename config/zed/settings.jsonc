@@ -6,7 +6,7 @@
 {
   // UI Settings
   "ui_font_size": 16, // UI font size
-  "ui_font_family": "Roboto Mono", // Font for UI elements
+  "ui_font_family": ".SystemUIFont", // Font for UI elements
   "theme": "Tokyo Night Storm", // Overall theme
   "icon_theme": "Base Charmed Icons", // Icon set
   "relative_line_numbers": false, // Show relative line numbers
@@ -17,13 +17,13 @@
   "buffer_font_size": 16, // Font size in code buffers
   "buffer_font_family": "JetBrainsMono NF", // Font for the code editor
   "buffer_font_features": {
-    "calt": false // Contextual alternates in fonts
+    "calt": false, // Contextual alternates in fonts
   },
   "format_on_save": "on", // Automatically format files on save
   "tab_size": 4, // Tab width in spaces
   "show_edit_predictions": true, // Disable edit predictions
   "edit_predictions": {
-    "disabled_globs": [".env"] // Disable predictions for specific files
+    "disabled_globs": [".env"], // Disable predictions for specific files
   },
   "vim_mode": false, // Disable Vim-style keybindings
 
@@ -45,16 +45,16 @@
       "formatter": {
         "external": {
           "command": "prettier", // Use Prettier for formatting
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
-        }
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
       },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true // Auto-fix ESLint issues
-      }
+        "source.fixAll.eslint": true, // Auto-fix ESLint issues
+      },
     },
     "YAML": {
-      "show_edit_predictions": false
-    }
+      "show_edit_predictions": false,
+    },
   },
   "formatter": "prettier", // Default formatter
   "prettier": {
@@ -63,13 +63,13 @@
     "bracketSpacing": true, // Spaces inside object literals
     "singleQuote": true, // Use single quotes
     "jsxSingleQuote": true, // JSX single quotes
-    "allowed": true
+    "allowed": true,
   },
 
   // Telemetry
   "telemetry": {
     "diagnostics": false, // Disable diagnostic data submission
-    "metrics": false // Disable usage metrics
+    "metrics": false, // Disable usage metrics
   },
 
   // Autosave / Confirmation
@@ -80,40 +80,40 @@
   "toolbar": {
     "breadcrumbs": true, // Show breadcrumbs
     "quick_actions": false, // Hide quick action buttons
-    "selections_menu": false // Hide selections menu
+    "selections_menu": false, // Hide selections menu
   },
   "tabs": {
-    "git_status": true // Show Git status in tabs
+    "git_status": true, // Show Git status in tabs
   },
   "outline_panel": {
-    "button": false // Hide outline panel button
+    "button": false, // Hide outline panel button
   },
   "notification_panel": {
-    "button": false // Hide notification panel button
+    "button": false, // Hide notification panel button
   },
   "collaboration_panel": {
-    "button": false // Hide collaboration panel button
+    "button": false, // Hide collaboration panel button
   },
 
   // Terminal
   "terminal": {
     "copy_on_select": true, // Automatically copy selected text
     "blinking": "on", // Cursor blinking
-    "font_family": "Roboto Mono", // Terminal font
+    "font_family": "JetBrainsMono NF", // Terminal font
     "cursor_shape": "bar", // Cursor style
     "shell": {
-      "program": "fish" // Default shell
-    }
+      "program": "powershell.exe", // Default shell
+    },
   },
 
   // Agent / AI
   "agent": {
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.5-pro"
-    }
+      "model": "gemini-2.5-pro",
+    },
   },
   "features": {
-    "edit_prediction_provider": "zed" // Edit prediction backend
-  }
+    "edit_prediction_provider": "zed", // Edit prediction backend
+  },
 }
