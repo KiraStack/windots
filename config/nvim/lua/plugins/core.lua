@@ -128,6 +128,7 @@ return {
 			attach_to_untracked = true,
 		},
 		config = function(_, opts)
+		    -- Load required module
 			require("gitsigns").setup(opts)
 		end,
 	},
@@ -140,6 +141,7 @@ return {
 		event = "BufReadPost",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+		    -- Load required module
 			require("todo-comments").setup()
 		end,
 	},
@@ -151,6 +153,7 @@ return {
 		"windwp/nvim-ts-autotag",
 		event = "BufReadPost",
 		config = function()
+		    -- Load required module
 			require("nvim-ts-autotag").setup()
 		end,
 	},
@@ -214,40 +217,43 @@ return {
 	-- │                             spellwarn.nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
 	{
-		-- 'ravibrock/spellwarn.nvim',
-		-- event = 'VeryLazy',
-		-- opts = {
-		--     event = {
-		--         'CursorHold',
-		--         'InsertLeave',
-		--         'TextChanged',
-		--         'TextChangedI',
-		--         'TextChangedP',
-		--     },
-		--     enable = true,
-		--     ft_config = {
-		--         alpha = false,
-		--         help = false,
-		--         lazy = false,
-		--         lspinfo = false,
-		--         mason = false,
-		--     },
-		--     ft_default = true,
-		--     max_file_size = nil,
-		--     severity = {
-		--         spellbad = 'WARN',
-		--         spellcap = 'HINT',
-		--         spelllocal = 'HINT',
-		--         spellrare = 'INFO',
-		--     },
-		--     prefix = 'possible misspelling(s): ',
-		--     diagnostic_opts = { severity_sort = true },
-		-- },
-		-- config = function()
-		--     vim.opt.spell = true
-		--     vim.opt.spelllang = { 'en' }
-		--     require('spellwarn').setup(opts)
-		-- end,
+		'ravibrock/spellwarn.nvim',
+		event = 'VeryLazy',
+		opts = {
+		    event = {
+		        'CursorHold',
+		        'InsertLeave',
+		        'TextChanged',
+		        'TextChangedI',
+		        'TextChangedP',
+		    },
+		    enable = true,
+		    ft_config = {
+		        alpha = false,
+		        help = false,
+		        lazy = false,
+		        lspinfo = false,
+		        mason = false,
+		    },
+		    ft_default = true,
+		    max_file_size = nil,
+		    severity = {
+		        spellbad = 'WARN',
+		        spellcap = 'HINT',
+		        spelllocal = 'HINT',
+		        spellrare = 'INFO',
+		    },
+		    prefix = 'possible misspelling(s): ',
+		    diagnostic_opts = { severity_sort = true },
+		},
+		config = function(_, opts)
+		    -- Set spell checking options
+		    vim.opt.spell = true
+		    vim.opt.spelllang = { 'en' }
+
+			-- Load required module
+		    require('spellwarn').setup(opts)
+		end,
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
@@ -293,7 +299,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-			-- Setup conform with options
+			-- Load required module
 			require("conform").setup(opts)
 
 			-- Bind castom keymap
@@ -320,7 +326,39 @@ return {
 			explorer = { enabled = true },
 			indent = { enabled = false },
 			input = { enabled = false },
-			picker = { enabled = false },
+			picker = {
+			    enabled = false,
+				win = {
+                    input = {
+                        keys = {
+                            ["<a-s>"] = { "flash", mode = { "n", "i" } },
+                            ["s"] = { "flash" },
+                        },
+                    },
+                },
+                actions = {
+                    flash = function(picker)
+                        require("flash").jump({
+                            pattern = "^",
+                            label = {
+                                after = { 0, 0 },
+                            },
+                            search = {
+                                mode = "search",
+                                exclude = {
+                                    function(win)
+                                        return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                                    end,
+                                },
+                            },
+                            action = function(match)
+                                local idx = picker.list:row2idx(match.pos[1])
+                                picker.list:_move(idx, true, true)
+                            end,
+                        })
+                    end,
+                },
+			},
 			notifier = { enabled = false },
 			quickfile = { enabled = false },
 			scope = { enabled = false },
@@ -337,6 +375,35 @@ return {
 				end,
 				desc = "Smart Find Files",
 			},
+			{
+                "<leader>sf",
+                function()
+                    Snacks.picker({
+                        finder = "proc",
+                        cmd = "fd",
+                        args = { "--type", "d", "--exclude", ".git" },
+                        title = "Select search directory",
+                        layout = {
+                            preset = "select",
+                        },
+                        actions = {
+                            confirm = function(picker, item)
+                                picker:close()
+                                vim.schedule(function()
+                                    Snacks.picker.grep({
+                                        cwd = item.file,
+                                    })
+                                end)
+                            end,
+                        },
+                        transform = function(item)
+                            item.file = item.text
+                            item.dir = true
+                        end,
+                    })
+                end,
+                desc = "Search in directory",
+            },
 			{
 				"<leader>,",
 				function()
@@ -391,7 +458,7 @@ return {
 			{
 				"<leader>ff",
 				function()
-					Snacks.picker.files()
+					Snacks.picker.live()
 				end,
 				desc = "Find Files",
 			},
@@ -1012,14 +1079,20 @@ return {
 		opts = {
 			-- Ensure the following language servers are installed
 			servers = {
-				"clangd",
-				"cssls",
-				"html",
-				"jdtls",
-				"ts_ls",
-				"lua_ls",
-				"pyright",
-				"rust_analyzer",
+			    -- Include all servers
+    			["*"] = {
+                    -- Define key mappings
+                    keys = {
+                        { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition", has = "definition" },
+                        { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+                        { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+                        { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+                        { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
+                        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
+                        { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming", has = "callHierarchy/incomingCalls" },
+                        { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing", has = "callHierarchy/outgoingCalls" },
+                    },
+                },
 			},
 
 			-- Automatically enable servers
@@ -1039,9 +1112,12 @@ return {
 					Hint = "H", -- previous value: ''
 				}
 
-				-- Configure signs and virtual text for diagnostics
+				-- Iterate over diagnostic icons
 				for severity, icon in pairs(diagnostic_icons) do
+				    -- Define diagnostic icons
 					local highlight_group = "DiagnosticVirtualText" .. severity .. "Border"
+
+					-- Configure signs and virtual text for diagnostics
 					vim.fn.sign_define("DiagnosticSign" .. severity, {
 						text = icon,
 						texthl = highlight_group,
@@ -1067,7 +1143,7 @@ return {
 			mason_lsp.setup({ ensure_installed = opts.servers, automatic_installation = true })
 
 			-- Iterate over servers
-			for _, server in ipairs(opts.servers) do
+			for server, config in pairs(opts.servers) do
 				lspconfig[server].setup({ on_attach = opts.on_attach, capabilities = default_capabilities }) -- Setup server
 			end
 		end,
@@ -1105,7 +1181,6 @@ return {
 				},
 			},
 		},
-
 		config = function(_, opts)
 			-- Function to find the Rojo project file
 			local function rojo_project()

@@ -20,12 +20,16 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local dashboard = require("dashboard")
-			local snacks = require("snacks")
+		    -- Check if center is enabled
+		    if not vim.tbl_get(opts, "config", "center") then
+                return
+            end
 
+            -- Highlight the dashboard header
 			vim.cmd("highlight DashboardHeader guifg=#ffffff")
 
-			local shortcuts = {
+			-- Define shortcuts
+			opts.config.shortcut = {
 				{
 					icon = "󰒲  ",
 					icon_hl = "Boolean",
@@ -39,7 +43,7 @@ return {
 					icon_hl = "Boolean",
 					desc = "Files ",
 					group = "Statement",
-					action = snacks.picker.files,
+					action = Snacks.picker.files,
 					key = "f",
 				},
 				{
@@ -47,7 +51,7 @@ return {
 					icon_hl = "Boolean",
 					desc = "Recent ",
 					group = "String",
-					action = snacks.picker.recent,
+					action = Snacks.picker.recent,
 					key = "r",
 				},
 				{
@@ -55,7 +59,7 @@ return {
 					icon_hl = "Boolean",
 					desc = "Grep ",
 					group = "ErrorMsg",
-					action = snacks.picker.grep,
+					action = Snacks.picker.grep,
 					key = "g",
 				},
 				{
@@ -68,8 +72,23 @@ return {
 				},
 			}
 
-			opts.config.shortcut = shortcuts
-			dashboard.setup(opts)
+			-- Define projects
+			local projects = {
+                action = "lua Snacks.picker.projects()",
+                desc = " Projects",
+                icon = " ",
+                key = "p",
+            }
+
+            -- Set key format
+            projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
+            projects.key_format = "  %s"
+
+             -- Add projects to center section
+            table.insert(opts.config.center, 3, projects)
+
+            -- Load required module
+			require("dashboard").setup(opts)
 		end,
 	},
 
@@ -86,62 +105,45 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			variant = "auto", -- Enable auto detection
-			transparent = true, -- Enable transparency
-			italic_comments = true, -- Enable italic comments
-			hide_fillchars = true, -- Hide fill characters
-			borderless_pickers = true, -- Hide picker borders
-			cache = true, -- Cache colorscheme colors
+			variant = "auto",
+			transparent = true,
+			italic_comments = true,
+			hide_fillchars = true,
+			borderless_pickers = true,
+			cache = true,
 		},
 		config = function(_, opts)
-			require("cyberdream").setup(opts) -- Setup theme with options
-			vim.cmd.colorscheme("cyberdream") -- Apply Cyberdream colorscheme
+		    -- Load required module
+			require("cyberdream").setup(opts)
+
+			-- Set colorscheme
+			vim.cmd.colorscheme("cyberdream")
 		end,
 	},
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                               themery.nvim                               │
 	-- ╰──────────────────────────────────────────────────────────────────────────╯
-	{
-		"zaldih/themery.nvim",
-		cmd = "Themery",
-		keys = {
-			{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
-		},
-		opts = {
-			themes = {
-				{
-					name = "cyberdream",
-					colorscheme = "cyberdream",
-				},
-			},
-			livePreview = true,
-		},
-		config = function(_, opts)
-			require("themery").setup(opts)
-		end,
-	},
-
-	-- ╭──────────────────────────────────────────────────────────────────────────╮
-	-- │                               twilight.nvim                              │
-	-- ╰──────────────────────────────────────────────────────────────────────────╯
-	{
-		"folke/twilight.nvim",
-		event = "BufReadPost",
-		opts = {
-			dimming = {
-				alpha = 0.25, -- Amount of dimming
-				color = { "Normal", "#ffffff" },
-				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
-				inactive = true, -- When true, other windows will be fully dimmed (unless they contain the same buffer)
-			},
-			context = 20, -- Amount of context lines to show
-		},
-		config = function(_, opts)
-			require("twilight").setup(opts) -- Setup plugin with options
-			vim.cmd("TwilightEnable") -- Enable twilight
-		end,
-	},
+	-- {
+	-- 	"zaldih/themery.nvim",
+	-- 	cmd = "Themery",
+	-- 	keys = {
+	-- 		{ "<leader>ct", ":Themery<CR>", "Toggle theme" },
+	-- 	},
+	-- 	opts = {
+	-- 		themes = {
+	-- 			{
+	-- 				name = "cyberdream",
+	-- 				colorscheme = "cyberdream",
+	-- 			},
+	-- 		},
+	-- 		livePreview = true,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 	    -- Load required module
+	-- 		require("themery").setup(opts)
+	-- 	end,
+	-- },
 
 	-- ╭──────────────────────────────────────────────────────────────────────────╮
 	-- │                               nvim-cokeline.nvim                         │
@@ -159,38 +161,37 @@ return {
 				return require("cokeline.hlgroups").get_hl_attr(group, attr)
 			end
 
-			-- Setup plugin with options
+			-- Load required module
 			require("cokeline").setup({
 				default_hl = {
-					fg = function(buffer)
-						return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
-					end,
-					bg = "NONE",
+                    fg = function(buffer)
+                    return
+                        buffer.is_focused
+                        and get_hex('ColorColumn', 'bg')
+                        or get_hex('Normal', 'fg')
+                    end,
+                    bg = function(buffer)
+                    return
+                        buffer.is_focused
+                        and get_hex('Normal', 'fg')
+                        or get_hex('ColorColumn', 'bg')
+                    end,
 				},
 				components = {
 					{
-						text = function(buffer)
-							return (buffer.index ~= 1) and "▏" or ""
-						end,
-						fg = function()
-							return get_hex("Normal", "fg")
-						end,
+						text = function(buffer) return ' ' .. buffer.devicon.icon end,
+						fg = function(buffer) return buffer.devicon.color end,
 					},
 					{
-						text = function(buffer)
-							return "    " .. buffer.devicon.icon
-						end,
-						fg = function(buffer)
-							return buffer.devicon.color
-						end,
+						text = function(buffer) return buffer.unique_prefix end,
+						fg = get_hex('Comment', 'fg'),
+						italic = true
 					},
 					{
-						text = function(buffer)
-							return buffer.filename .. "    "
-						end,
-						bold = function(buffer)
-							return buffer.is_focused
-						end,
+						text = function(buffer) return buffer.filename .. ' ' end,
+						underline = function(buffer)
+							return buffer.is_hovered and not buffer.is_focused
+						end
 					},
 					{
 						text = "󰖭",
@@ -205,7 +206,7 @@ return {
 			})
 
 			-- Persist focus
-			-- require("cokeline.history"):last():focus() -- Commented out for now
+			require("cokeline.history"):last():focus()
 		end,
 	},
 
